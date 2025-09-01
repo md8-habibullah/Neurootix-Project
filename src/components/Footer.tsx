@@ -57,7 +57,7 @@ const Footer = () => {
                 <Cpu className="h-6 w-6 text-primary-foreground" />
               </div>
               <span className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                Neorootix
+                Neurootix
               </span>
             </div>
             <p className="text-muted-foreground mb-6 leading-relaxed max-w-md">
@@ -69,7 +69,7 @@ const Footer = () => {
             <div className="space-y-2 mb-6">
               <div className="flex items-center text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 mr-2 text-accent" />
-                hello@neorootix.com
+                hello@Neurootix.com
               </div>
               <div className="flex items-center text-sm text-muted-foreground">
                 <Phone className="h-4 w-4 mr-2 text-primary" />
@@ -134,7 +134,7 @@ const Footer = () => {
         {/* Bottom Footer */}
         <div className="py-8 flex flex-col md:flex-row justify-between items-center">
           <div className="text-sm text-muted-foreground mb-4 md:mb-0">
-            © {currentYear} Neorootix. All rights reserved. | 
+            © {currentYear} Neurootix. All rights reserved. | 
             <span className="text-accent ml-2">Quantum Secured</span>
           </div>
           

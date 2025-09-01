@@ -1,8 +1,8 @@
-# NeoRootix Project
+# Neurootix Project
 
 ## Overview
 
-NeoRootix is a cutting-edge AI solutions provider, specializing in AI development, data science, and business process automation. This project represents the company's website, built using React, TypeScript, Tailwind CSS, and Shadcn UI components.
+Neurootix is a cutting-edge AI solutions provider, specializing in AI development, data science, and business process automation. This project represents the company's website, built using React, TypeScript, Tailwind CSS, and Shadcn UI components.
 
 ## Technologies Used
 
@@ -64,7 +64,7 @@ NeoRootix is a cutting-edge AI solutions provider, specializing in AI developmen
 
 -   **`src/components/`**: Contains the React components used to build the website.
     -   `HeroSection`: The main landing section with a rotating carousel of AI solutions.
-    -   `ServicesSection`: Highlights the key services offered by NeoRootix.
+    -   `ServicesSection`: Highlights the key services offered by Neurootix.
     -   `AISolutionsSection`: Showcases specific AI solutions with detailed descriptions.
     -   `AboutSection`: Provides information about the company.
     -   `PricingSection`: Displays transparent pricing plans for different AI solutions.

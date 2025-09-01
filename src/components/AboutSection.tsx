@@ -31,7 +31,7 @@ const AboutSection = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center space-x-2 bg-card/50 backdrop-blur-sm border border-accent/20 rounded-full px-4 py-2 mb-6">
             <Lightbulb className="h-4 w-4 text-accent" />
-            <span className="text-sm font-medium text-accent">About Neorootix</span>
+            <span className="text-sm font-medium text-accent">About Neurootix</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             Where Science Meets
@@ -41,7 +41,7 @@ const AboutSection = () => {
             </span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            At Neorootix, we specialize in providing innovative and personalized Artificial Intelligence solutions to businesses of all sizes and industries. 
+            At Neurootix, we specialize in providing innovative and personalized Artificial Intelligence solutions to businesses of all sizes and industries. 
             With our highly skilled team of data scientists, software engineers, and AI experts, we aim to revolutionize how companies manage their data 
             and automate processes for optimal performance.
           </p>

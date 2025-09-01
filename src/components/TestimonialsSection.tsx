@@ -6,19 +6,19 @@ const TestimonialsSection = () => {
     {
       name: "Sandra Martínez",
       role: "CEO, TechCorp",
-      content: "The Neorootix team has completely transformed the way we handle data and processes in our company. We've achieved impressive levels of efficiency that we never would have imagined before implementing these solutions.",
+      content: "The Neurootix team has completely transformed the way we handle data and processes in our company. We've achieved impressive levels of efficiency that we never would have imagined before implementing these solutions.",
       rating: 5
     },
     {
       name: "Juan Carlos Rodríguez",
       role: "eCommerce Owner",
-      content: "As an eCommerce owner, Neorootix solutions have contributed to the growth of my company. Now, I can sell more effectively and keep up with the competitive market.",
+      content: "As an eCommerce owner, Neurootix solutions have contributed to the growth of my company. Now, I can sell more effectively and keep up with the competitive market.",
       rating: 5
     },
     {
       name: "Roberto Pérez",
       role: "Operations Director",
-      content: "The change in our processes has been a total improvement. The efficiency of all our teams has increased considerably. We are saving time and resources thanks to Neorootix solutions.",
+      content: "The change in our processes has been a total improvement. The efficiency of all our teams has increased considerably. We are saving time and resources thanks to Neurootix solutions.",
       rating: 5
     }
   ];

@@ -29,7 +29,7 @@ const Navigation = () => {
               <Cpu className="h-6 w-6 text-primary-foreground" />
             </div>
             <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-              Neorootix
+              Neurootix
             </span>
           </div>
 

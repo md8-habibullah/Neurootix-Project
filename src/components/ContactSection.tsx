@@ -43,7 +43,7 @@ const ContactSection = () => {
     {
       icon: <Mail className="h-5 w-5" />,
       title: "Email Us",
-      details: ["hello@neorootix.com", "support@neorootix.com", "careers@neorootix.com"],
+      details: ["hello@Neurootix.com", "support@Neurootix.com", "careers@Neurootix.com"],
       color: "text-accent"
     },
     {

@@ -14,7 +14,7 @@ const TeamSection = () => {
       social: {
         linkedin: "#",
         github: "#",
-        email: "sarah@neorootix.com"
+        email: "sarah@Neurootix.com"
       }
     },
     {
@@ -26,7 +26,7 @@ const TeamSection = () => {
       social: {
         linkedin: "#",
         github: "#",
-        email: "alex@neorootix.com"
+        email: "alex@Neurootix.com"
       }
     },
     {
@@ -38,7 +38,7 @@ const TeamSection = () => {
       social: {
         linkedin: "#",
         github: "#",
-        email: "maya@neorootix.com"
+        email: "maya@Neurootix.com"
       }
     },
     {
@@ -50,7 +50,7 @@ const TeamSection = () => {
       social: {
         linkedin: "#",
         github: "#",
-        email: "james@neorootix.com"
+        email: "james@Neurootix.com"
       }
     },
     {
@@ -62,7 +62,7 @@ const TeamSection = () => {
       social: {
         linkedin: "#",
         github: "#",
-        email: "lisa@neorootix.com"
+        email: "lisa@Neurootix.com"
       }
     },
     {
@@ -74,7 +74,7 @@ const TeamSection = () => {
       social: {
         linkedin: "#",
         github: "#",
-        email: "david@neorootix.com"
+        email: "david@Neurootix.com"
       }
     }
   ];
