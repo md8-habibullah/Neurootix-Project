@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Brain, Bot, Database, TrendingUp, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
+// import heroImage from "@/assets/hero-image.jpg";
 import heroImage from "@/assets/hero-tech-lab.jpg";
+
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
