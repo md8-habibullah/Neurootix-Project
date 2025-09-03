@@ -1,21 +1,24 @@
 import { useState } from "react";
 import { Menu, X, Cpu } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link, useLocation } from "react-router-dom";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const location = useLocation();
+  
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Products", href: "#products" },
-    { name: "Team", href: "#team" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Services", href: "/services" },
+    { name: "Portfolio", href: "/portfolio" },
+    { name: "Blog", href: "/blog" },
+    { name: "Contact", href: "/contact" },
+    { name: "Careers", href: "/careers" },
   ];
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    element?.scrollIntoView({ behavior: "smooth" });
+  const closeMenu = () => {
     setIsOpen(false);
   };
 
@@ -24,29 +27,33 @@ const Navigation = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <div className="bg-gradient-primary p-2 rounded-lg shadow-glow-primary">
               <Cpu className="h-6 w-6 text-primary-foreground" />
             </div>
             <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-              Neurootix
+              Neorootix
             </span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <button
+              <Link
                 key={item.name}
-                onClick={() => scrollToSection(item.href)}
-                className="text-foreground/80 hover:text-foreground transition-colors duration-200 hover:bg-muted/50 px-3 py-2 rounded-md"
+                to={item.href}
+                className={`text-foreground/80 hover:text-foreground transition-colors duration-200 hover:bg-muted/50 px-3 py-2 rounded-md ${
+                  location.pathname === item.href ? 'text-primary bg-muted/50' : ''
+                }`}
               >
                 {item.name}
-              </button>
+              </Link>
             ))}
-            <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-              Get Started
-            </Button>
+            <Link to="/contact">
+              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                Get Started
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -65,18 +72,23 @@ const Navigation = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-card rounded-lg mt-2 shadow-card">
               {navItems.map((item) => (
-                <button
+                <Link
                   key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left px-3 py-2 text-foreground/80 hover:text-foreground hover:bg-muted/50 rounded-md transition-colors"
+                  to={item.href}
+                  onClick={closeMenu}
+                  className={`block w-full text-left px-3 py-2 text-foreground/80 hover:text-foreground hover:bg-muted/50 rounded-md transition-colors ${
+                    location.pathname === item.href ? 'text-primary bg-muted/50' : ''
+                  }`}
                 >
                   {item.name}
-                </button>
+                </Link>
               ))}
               <div className="pt-2">
-                <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                  Get Started
-                </Button>
+                <Link to="/contact" onClick={closeMenu}>
+                  <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                    Get Started
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
