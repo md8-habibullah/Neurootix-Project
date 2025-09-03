@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Brain, Bot, Database, Code2, Smartphone, Camera, Palette, Cog, Zap } from "lucide-react";
-import servicesImage from "@/assets/services-icons.jpg";
+// import servicesImage from "@/assets/services-icons.jpg";
 
 const ServicesSection = () => {
   const services = [
@@ -134,14 +134,14 @@ const ServicesSection = () => {
               Our services work together seamlessly, allowing us to deliver comprehensive solutions 
               that combine multiple technologies for maximum impact and innovation.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-gradient-primary hover:shadow-glow-primary transition-all duration-300">
                 Explore Our Process
               </Button>
               <Button variant="outline" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground">
                 View Case Studies
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

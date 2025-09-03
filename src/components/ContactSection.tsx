@@ -12,6 +12,7 @@ const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    number: "",
     company: "",
     message: ""
   });
@@ -23,7 +24,7 @@ const ContactSection = () => {
       title: "Message Sent!",
       description: "Thank you for your inquiry. We'll get back to you within 24 hours.",
     });
-    setFormData({ name: "", email: "", company: "", message: "" });
+    setFormData({ name: "", email: "", number: "", company: "", message: "" });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -77,7 +78,7 @@ const ContactSection = () => {
             </span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            We're always excited to discuss new ideas and collaborations. 
+            We're always excited to discuss new ideas and collaborations.
             Reach out to explore how we can transform your vision into cutting-edge reality.
           </p>
         </div>
@@ -109,22 +110,39 @@ const ContactSection = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium text-foreground">
-                      Email Address *
+                    <label htmlFor="number" className="text-sm font-medium text-foreground">
+                      Phone Number *
                     </label>
                     <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
+                      id="number"
+                      name="number"
+                      type="number"
+                      value={formData.number}
                       onChange={handleChange}
-                      placeholder="your@email.com"
+                      placeholder="Phone Number"
                       required
                       className="bg-muted/50 border-border focus:border-primary"
                     />
                   </div>
                 </div>
-                
+
+                <div className="space-y-2">
+                  <label htmlFor="email" className="text-sm font-medium text-foreground">
+                    Email Address *
+                  </label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="your@email.com"
+                    required
+                    className="bg-muted/50 border-border focus:border-primary"
+                  />
+                </div>
+
+
                 <div className="space-y-2">
                   <label htmlFor="company" className="text-sm font-medium text-foreground">
                     Company/Organization
@@ -155,9 +173,9 @@ const ContactSection = () => {
                   />
                 </div>
 
-                <Button 
-                  type="submit" 
-                  size="lg" 
+                <Button
+                  type="submit"
+                  size="lg"
                   className="w-full bg-gradient-primary hover:shadow-glow-primary transition-all duration-300"
                 >
                   <Send className="h-4 w-4 mr-2" />
@@ -170,8 +188,8 @@ const ContactSection = () => {
           {/* Contact Information */}
           <div className="space-y-6">
             {contactInfo.map((info, index) => (
-              <Card 
-                key={index} 
+              <Card
+                key={index}
                 className="bg-gradient-card border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 hover:-translate-y-1 group"
               >
                 <CardContent className="p-6">

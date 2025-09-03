@@ -5,7 +5,7 @@ import AISolutionsSection from "@/components/AISolutionsSection";
 import AboutSection from "@/components/AboutSection";
 import PricingSection from "@/components/PricingSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
-import TeamSection from "@/components/TeamSection";
+// import TeamSection from "@/components/TeamSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
@@ -19,7 +19,7 @@ const Index = () => {
       <AboutSection />
       <PricingSection />
       <TestimonialsSection />
-      <TeamSection />
+      {/* <TeamSection /> */}
       <ContactSection />
       <Footer />
     </div>

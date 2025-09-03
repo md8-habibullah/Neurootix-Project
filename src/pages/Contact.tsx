@@ -36,7 +36,7 @@ const Contact = () => {
     {
       icon: <Clock className="h-6 w-6" />,
       title: "Business Hours",
-      details: ["Monday - Friday: 9:00 AM - 6:00 PM", "Saturday: 10:00 AM - 4:00 PM", "Sunday: Closed"]
+      details: ["Sunday - Thursday: 9:00 AM - 6:00 PM", "Saturday: 10:00 AM - 4:00 PM", "Friday: Closed"]
     }
   ];
 
@@ -126,17 +126,17 @@ const Contact = () => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="firstName">First Name *</Label>
-                    <Input id="firstName" placeholder="John" className="mt-2" />
+                    <Input id="firstName" placeholder="Abu" className="mt-2" />
                   </div>
                   <div>
                     <Label htmlFor="lastName">Last Name *</Label>
-                    <Input id="lastName" placeholder="Doe" className="mt-2" />
+                    <Input id="lastName" placeholder="Hurayra" className="mt-2" />
                   </div>
                 </div>
                 
                 <div>
                   <Label htmlFor="email">Email Address *</Label>
-                  <Input id="email" type="email" placeholder="john@example.com" className="mt-2" />
+                  <Input id="email" type="email" placeholder="abu hurayra@example.com" className="mt-2" />
                 </div>
                 
                 <div>
@@ -164,10 +164,10 @@ const Contact = () => {
                     className="w-full mt-2 px-3 py-2 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                   >
                     <option value="">Select budget range</option>
-                    <option value="5k-15k">$5,000 - $15,000</option>
-                    <option value="15k-50k">$15,000 - $50,000</option>
-                    <option value="50k-100k">$50,000 - $100,000</option>
-                    <option value="100k+">$100,000+</option>
+                    <option value="5k-15k">Below $99</option>
+                    <option value="15k-50k">$99 - $299</option>
+                    <option value="50k-100k">$499 - $1,999</option>
+                    <option value="100k+">Above $5,000</option>
                   </select>
                 </div>
                 
@@ -257,7 +257,7 @@ const Contact = () => {
       </section>
 
       {/* Map Section */}
-      <section className="py-16">
+      {/* <section className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
@@ -280,7 +280,7 @@ const Contact = () => {
             </Card>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </div>

@@ -3,11 +3,12 @@ import { ArrowRight, Sparkles, Brain, Bot, Database, TrendingUp, Zap } from "luc
 import { useEffect, useState } from "react";
 // import heroImage from "@/assets/hero-image.jpg";
 import heroImage from "@/assets/hero-tech-lab.jpg";
+import { Link } from "react-router-dom";
 
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  
+
   const slides = [
     {
       title: "Artificial Intelligence Solutions",
@@ -80,7 +81,7 @@ const HeroSection = () => {
                 {slides[currentSlide].icon}
               </div>
             </div>
-            
+
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
               <span className="bg-gradient-primary bg-clip-text text-transparent">
                 {slides[currentSlide].title}
@@ -98,20 +99,24 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button 
-              size="lg" 
-              className="bg-gradient-primary hover:shadow-glow-primary transition-all duration-300 text-primary-foreground group"
-            >
-              Get Free Consultation
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-accent text-accent hover:bg-accent hover:text-accent-foreground hover:shadow-glow-accent transition-all duration-300"
-            >
-              Quote Now
-            </Button>
+            <Link to="/contact">
+              <Button
+                size="lg"
+                className="bg-gradient-primary hover:shadow-glow-primary transition-all duration-300 text-primary-foreground group"
+              >
+                Get Free Consultation
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+            <Link to="/contact">
+
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-accent text-accent hover:bg-accent hover:text-accent-foreground hover:shadow-glow-accent transition-all duration-300"
+              >
+                Quote Now
+              </Button></Link>
           </div>
 
           {/* Slide Indicators */}
@@ -120,11 +125,10 @@ const HeroSection = () => {
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentSlide 
-                    ? 'bg-primary scale-125' 
-                    : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
-                }`}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide
+                  ? 'bg-primary scale-125'
+                  : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                  }`}
               />
             ))}
           </div>

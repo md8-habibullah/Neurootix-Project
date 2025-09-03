@@ -30,7 +30,7 @@ const Services = () => {
     {
       icon: <Brain className="h-8 w-8" />,
       title: "ML/AI Solutions",
-      lead: "Pushpita Apu",
+      lead: "Pushpita",
       description: "Implement intelligent systems that learn, adapt, and automate business processes.",
       features: ["Machine Learning Models", "AI Automation", "Generative AI", "Natural Language Processing"],
       technologies: ["TensorFlow", "PyTorch", "Scikit-learn", "OpenAI API", "Hugging Face"]
@@ -49,7 +49,7 @@ const Services = () => {
       lead: "Habibullah",
       description: "Protect your digital assets with comprehensive security solutions and monitoring.",
       features: ["Threat Detection", "Penetration Testing", "Security Audits", "Compliance Management"],
-      technologies: ["Kali Linux", "Metasploit", "Wireshark", "SIEM Tools", "Firewall Management"]
+      technologies: ["Linux", "Metasploit", "Wireshark", "SIEM Tools", "Firewall Management"]
     },
     {
       icon: <Palette className="h-8 w-8" />,
@@ -177,9 +177,9 @@ const Services = () => {
                   Get Started Today
                 </Button>
               </Link>
-              <Link to="/portfolio">
+              <Link to="/about">
                 <Button size="lg" variant="outline">
-                  View Our Work
+                  View Our Vision
                 </Button>
               </Link>
             </div>
