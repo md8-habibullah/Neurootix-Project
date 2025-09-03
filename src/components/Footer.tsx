@@ -61,10 +61,10 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-muted-foreground mb-6 leading-relaxed max-w-md">
-              Pioneering the future through artificial intelligence, robotics, and cutting-edge technology. 
+              Pioneering the future through artificial intelligence, robotics, and cutting-edge technology.
               Where innovation meets execution.
             </p>
-            
+
             {/* Contact Info */}
             <div className="space-y-2 mb-6">
               <div className="flex items-center text-sm text-muted-foreground">
@@ -134,10 +134,8 @@ const Footer = () => {
         {/* Bottom Footer */}
         <div className="py-8 flex flex-col md:flex-row justify-between items-center">
           <div className="text-sm text-muted-foreground mb-4 md:mb-0">
-            © {currentYear} Neurootix. All rights reserved. | 
-            <span className="text-accent ml-2">Quantum Secured</span>
-          </div>
-          
+            © {currentYear} Neurootix. All rights reserved.</div>
+
           <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
             <div className="flex space-x-6 text-sm">
               <button className="text-muted-foreground hover:text-foreground transition-colors">
@@ -146,14 +144,11 @@ const Footer = () => {
               <button className="text-muted-foreground hover:text-foreground transition-colors">
                 Terms of Service
               </button>
-              <button className="text-muted-foreground hover:text-foreground transition-colors">
-                Cookies
-              </button>
             </div>
-            
+
             <div className="flex items-center space-x-2 text-xs text-muted-foreground">
               <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
-              <span>Systems Online</span>
+              <span>Online</span>
             </div>
           </div>
         </div>

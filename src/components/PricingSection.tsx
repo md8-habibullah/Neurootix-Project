@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, DollarSign, Star, Crown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const PricingSection = () => {
   const plans = [
@@ -85,11 +86,10 @@ const PricingSection = () => {
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
           {plans.map((plan, index) => (
-            <Card 
-              key={index} 
-              className={`relative bg-gradient-card border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 hover:-translate-y-1 ${
-                plan.popular ? 'ring-2 ring-primary/50 scale-105' : ''
-              }`}
+            <Card
+              key={index}
+              className={`relative bg-gradient-card border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 hover:-translate-y-1 ${plan.popular ? 'ring-2 ring-primary/50 scale-105' : ''
+                }`}
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -98,7 +98,7 @@ const PricingSection = () => {
                   </Badge>
                 </div>
               )}
-              
+
               <CardHeader className="text-center pb-8">
                 <div className="flex justify-center mb-4">
                   <div className={`p-3 rounded-full ${plan.popular ? 'bg-gradient-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`}>
@@ -120,7 +120,7 @@ const PricingSection = () => {
                   {plan.description}
                 </CardDescription>
               </CardHeader>
-              
+
               <CardContent className="space-y-6">
                 <ul className="space-y-3">
                   {plan.features.map((feature, featureIndex) => (
@@ -130,17 +130,18 @@ const PricingSection = () => {
                     </li>
                   ))}
                 </ul>
-                
-                <Button 
-                  className={`w-full ${
-                    plan.popular 
-                      ? 'bg-gradient-primary hover:shadow-glow-primary' 
+
+                <Link to="/contact">
+                  <Button
+                    className={`w-full ${plan.popular
+                      ? 'bg-gradient-primary hover:shadow-glow-primary'
                       : 'bg-muted hover:bg-muted/80'
-                  } transition-all duration-300`}
-                  size="lg"
-                >
-                  {plan.name === 'Enterprise' ? 'Get Custom Quote' : 'Get Started'}
-                </Button>
+                      } transition-all duration-300`}
+                    size="lg"
+                  >
+                    {plan.name === 'Enterprise' ? 'Get Custom Quote' : 'Get Started'}
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           ))}

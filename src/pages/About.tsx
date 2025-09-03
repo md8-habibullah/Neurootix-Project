@@ -8,74 +8,75 @@ import { Target, Eye, Users, Award } from "lucide-react";
 const About = () => {
   const teamMembers = [
     {
-      name: "Mukim",
+      name: "Mahdin Islam Mukim",
       role: "Founder & Chairman",
       expertise: "Data Scientist & Graphics Designer",
       description: "Visionary leader driving strategic innovation in data science and creative design.",
       specialties: ["Data Science", "Graphics Design", "Robotics", "Strategic Vision"]
     },
     {
-      name: "Pushpita Apu",
-      role: "COO & HR",
-      expertise: "AI/ML Engineer",
-      description: "Operations expert specializing in artificial intelligence and machine learning solutions.",
-      specialties: ["AI/ML Engineering", "Operations Management", "Human Resources", "Team Leadership"]
-    },
-    {
-      name: "Rocky",
-      role: "CTO",
-      expertise: "Mobile Application Developer (Flutter) & Graphics Designer",
-      description: "Technical leader driving mobile innovation and creative design excellence.",
-      specialties: ["Flutter Development", "Mobile Apps", "Graphics Design", "Technical Leadership"]
-    },
-    {
-      name: "Lami",
-      role: "CIO",
-      expertise: "Software Engineer",
-      description: "IT infrastructure expert managing scalable software systems and architecture.",
-      specialties: ["Software Engineering", "System Architecture", "IT Infrastructure", "Development"]
-    },
-    {
-      name: "Foyaz",
+      name: "Md. Foyaz Ullah Shovo",
       role: "CEO",
       expertise: "Business Development Manager & Marketing Expert",
       description: "Business growth strategist driving market expansion and client relationships.",
       specialties: ["Business Development", "Marketing Strategy", "Client Relations", "Growth Management"]
     },
     {
-      name: "Antu",
+      name: "Maliha Sanjana Pushpita",
+      role: "COO & HR",
+      expertise: "AI/ML Engineer",
+      description: "Operations expert specializing in artificial intelligence and machine learning solutions.",
+      specialties: ["AI/ML Engineering", "Operations Management", "Human Resources", "Team Leadership"]
+    },
+    {
+      name: "Riazul Hasan Rocky",
+      role: "CTO",
+      expertise: "Mobile Application Developer (Flutter) & Graphics Designer",
+      description: "Technical leader driving mobile innovation and creative design excellence.",
+      specialties: ["Flutter Development", "Mobile Apps", "Graphics Design", "Technical Leadership"]
+    },
+    {
+      name: "Faharia Lami",
+      role: "CIO",
+      expertise: "Software Engineer",
+      description: "IT infrastructure expert managing scalable software systems and architecture.",
+      specialties: ["Software Engineering", "System Architecture", "IT Infrastructure", "Development"]
+    },
+
+    {
+      name: "Amena Begum Antu",
       role: "Creative Executive",
       expertise: "Branding & Digital Marketing Expert",
       description: "Brand strategist crafting compelling digital experiences and marketing campaigns.",
       specialties: ["Brand Strategy", "Digital Marketing", "Creative Direction", "Campaign Management"]
     },
     {
-      name: "Mehedi",
+      name: "Md.Mehedi Hasan",
       role: "Web Developer",
       expertise: "Marketing & Web Development",
       description: "Full-stack developer creating scalable web solutions with marketing integration.",
       specialties: ["Web Development", "Full-Stack", "Marketing Integration", "Scalable Solutions"]
     },
     {
-      name: "Habibullah",
-      role: "Security Engineer",
-      expertise: "Cyber Security Engineer",
-      description: "Security specialist ensuring robust protection for digital systems and data.",
-      specialties: ["Cybersecurity", "Threat Detection", "System Security", "Compliance"]
-    },
-    {
-      name: "Yousuf",
+      name: "Yousuf Abdullah",
       role: "IoT Developer & Finance Executive",
       expertise: "IoT Developer (Robotics) & Finance Executive",
       description: "Innovation expert combining IoT development with financial strategy.",
       specialties: ["IoT Development", "Robotics", "Financial Management", "Innovation Strategy"]
+    },
+    {
+      name: "MD. HABIBULLAH SHARIF",
+      role: "Security Engineer",
+      expertise: "Cyber Security Engineer",
+      description: "Security specialist ensuring robust protection for digital systems and data.",
+      specialties: ["Cybersecurity", "Threat Detection", "System Security", "Compliance"]
     }
   ];
 
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="pt-24 pb-16 bg-gradient-subtle">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -115,14 +116,14 @@ const About = () => {
             <h2 className="text-3xl font-bold mb-8 text-center">Company Overview</h2>
             <div className="prose prose-lg max-w-none text-muted-foreground">
               <p className="text-lg leading-relaxed">
-                Neorootix is a dynamic technology solutions provider, delivering innovative services in Data Science, 
-                ML/AI, Robotics/IoT, Cybersecurity, Graphics Design, Software Development, and Digital Marketing. 
-                Founded by Mukim, a visionary Data Scientist and Graphics Designer, our firm is driven by a talented 
+                Neorootix is a dynamic technology solutions provider, delivering innovative services in Data Science,
+                ML/AI, Robotics/IoT, Cybersecurity, Graphics Design, Software Development, and Digital Marketing.
+                Founded by Mukim, a visionary Data Scientist and Graphics Designer, our firm is driven by a talented
                 team of experts.
               </p>
               <p className="text-lg leading-relaxed mt-6">
-                Since our inception, we've empowered businesses worldwide with data-driven insights, secure systems, 
-                and transformative digital experiences. We blend cutting-edge research with practical engineering to 
+                Since our inception, we've empowered businesses worldwide with data-driven insights, secure systems,
+                and transformative digital experiences. We blend cutting-edge research with practical engineering to
                 build software that redefines what's possible.
               </p>
             </div>
@@ -141,12 +142,12 @@ const About = () => {
                   <h3 className="text-2xl font-bold">Our Mission</h3>
                 </div>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  Harness the power of technology to solve real-world challenges, delivering tailored solutions 
+                  Harness the power of technology to solve real-world challenges, delivering tailored solutions
                   that drive business success through collaboration, creativity, and excellence.
                 </p>
               </CardContent>
             </Card>
-            
+
             <Card className="border-0 shadow-elegant">
               <CardContent className="p-8">
                 <div className="flex items-center mb-6">
@@ -154,7 +155,7 @@ const About = () => {
                   <h3 className="text-2xl font-bold">Our Vision</h3>
                 </div>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  To be a global leader in scalable, secure, and creative IT solutions, transforming businesses 
+                  To be a global leader in scalable, secure, and creative IT solutions, transforming businesses
                   and communities with Data Science, AI, IoT, and digital innovation.
                 </p>
               </CardContent>
@@ -174,7 +175,7 @@ const About = () => {
               The minds pioneering our technological evolution
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {teamMembers.map((member, index) => (
               <Card key={index} className="group hover:shadow-glow-primary transition-all duration-300 border-0 bg-card/50 backdrop-blur-sm">
@@ -187,11 +188,11 @@ const About = () => {
                     <Badge variant="secondary" className="mb-2">{member.role}</Badge>
                     <p className="text-sm text-primary font-medium mb-3">{member.expertise}</p>
                   </div>
-                  
+
                   <p className="text-sm text-muted-foreground mb-4 text-center">
                     {member.description}
                   </p>
-                  
+
                   <div className="flex flex-wrap gap-1 justify-center">
                     {member.specialties.map((specialty, idx) => (
                       <Badge key={idx} variant="outline" className="text-xs">

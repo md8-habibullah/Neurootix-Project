@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Brain, Bot, MessageCircle, Code, Search, Cog, Warehouse, Megaphone } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const AISolutionsSection = () => {
   const solutions = [
@@ -78,8 +79,8 @@ const AISolutionsSection = () => {
         {/* Solutions Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {solutions.map((solution, index) => (
-            <Card 
-              key={index} 
+            <Card
+              key={index}
               className="bg-gradient-card border-border/50 hover:shadow-glow-accent/20 transition-all duration-300 hover:-translate-y-1 group text-center"
             >
               <CardHeader className="pb-4">
@@ -109,12 +110,17 @@ const AISolutionsSection = () => {
               Let's discuss how our AI solutions can help you achieve your business goals and stay ahead of the competition.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-gradient-accent hover:shadow-glow-accent transition-all duration-300">
-                See All Solutions
-              </Button>
-              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                Quote Now
-              </Button>
+
+              <Link to="/services">
+                <Button className="bg-gradient-accent hover:shadow-glow-accent transition-all duration-300">
+                  See All services
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                  Quote Now
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
