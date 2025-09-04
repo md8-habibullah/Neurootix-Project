@@ -15,7 +15,7 @@ const Navigation = () => {
     // { name: "Portfolio", href: "/portfolio" },
     // { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
-    { name: "Careers", href: "/careers" },
+    // { name: "Careers", href: "/careers" },
   ];
 
   const closeMenu = () => {
