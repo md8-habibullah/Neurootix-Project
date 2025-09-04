@@ -11,11 +11,32 @@ import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import NotFound from "./pages/NotFound";
+import DotGrid from "./DotGrid";
+
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <DotGrid
+      dotSize={3}
+      gap={12}
+      baseColor="#14192c"
+      activeColor="#4e8aeb"
+      proximity={100}
+      shockRadius={200}
+      shockStrength={3}
+      resistance={500}
+      returnDuration={1}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: 0,
+      }}
+    />
     <TooltipProvider>
       <Toaster />
       <Sonner />

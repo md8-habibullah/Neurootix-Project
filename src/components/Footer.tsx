@@ -21,17 +21,12 @@ const Footer = () => {
       links: [
         { name: "About Us", href: "#about" },
         { name: "Our Team", href: "#team" },
-        { name: "Case Studies", href: "#" },
-        { name: "Careers", href: "#" },
-        { name: "Press Kit", href: "#" }
-      ]
+        { name: "Careers", href: "#" }]
     },
     {
       title: "Resources",
       links: [
         { name: "Documentation", href: "#" },
-        { name: "API Reference", href: "#" },
-        { name: "White Papers", href: "#" },
         { name: "Blog", href: "#" },
         { name: "Support", href: "#contact" }
       ]

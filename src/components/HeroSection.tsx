@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Brain, Bot, Database, TrendingUp, Zap } from "lucide-react";
+import { ArrowRight, Brain, Bot, Database, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
-// import heroImage from "@/assets/hero-image.jpg";
-import heroImage from "@/assets/hero-tech-lab.jpg";
 import { Link } from "react-router-dom";
-
+import Hyperspeed from "@/Hyperspeed";
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -42,14 +40,49 @@ const HeroSection = () => {
     }, 4000);
     return () => clearInterval(timer);
   }, [slides.length]);
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
-      {/* Background Image with Overlay */}
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero"
+    >
+      {/* Hyperspeed Component */}
       <div className="absolute inset-0 z-0">
-        <img
-          src={heroImage}
-          alt="Futuristic technology laboratory"
-          className="w-full h-full object-cover opacity-30"
+        <Hyperspeed
+          effectOptions={{
+            length: 400,
+            roadWidth: 10,
+            islandWidth: 2,
+            lanesPerRoad: 4,
+            fov: 90,
+            fovSpeedUp: 150,
+            speedUp: 2,
+            carLightsFade: 0.4,
+            totalSideLightSticks: 20,
+            lightPairsPerRoadWay: 40,
+            shoulderLinesWidthPercentage: 0.05,
+            brokenLinesWidthPercentage: 0.1,
+            brokenLinesLengthPercentage: 0.5,
+            lightStickWidth: [0.12, 0.5],
+            lightStickHeight: [1.3, 1.7],
+            movingAwaySpeed: [60, 80],
+            movingCloserSpeed: [-120, -160],
+            carLightsLength: [400 * 0.03, 400 * 0.2],
+            carLightsRadius: [0.05, 0.14],
+            carWidthPercentage: [0.3, 0.5],
+            carShiftX: [-0.8, 0.8],
+            carFloorSeparation: [0, 5],
+            colors: {
+              roadColor: 0x080808,
+              islandColor: 0x0a0a0a,
+              background: 0x000000,
+              shoulderLines: 0xFFFFFF,
+              brokenLines: 0xFFFFFF,
+              leftCars: [0xD856BF, 0x6750A2, 0xC247AC],
+              rightCars: [0x03B3C3, 0x0E5EA5, 0x324555],
+              sticks: 0x03B3C3,
+            },
+          }}
         />
         <div className="absolute inset-0 bg-gradient-hero/80"></div>
       </div>
@@ -70,16 +103,14 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto">
           {/* Badge */}
           <div className="inline-flex items-center space-x-2 bg-card/20 backdrop-blur-sm border border-primary/20 rounded-full px-4 py-2 mb-6">
-            {/* <Sparkles className="h-4 w-4 text-accent" /> */}
-            {/* <span className="text-sm font-medium text-accent">AI Custom Software Development Company</span> */}
+            {/*  <Sparkles className="h-4 w-4 text-accent" /> */}
+            {/*  <span className="text-sm font-medium text-accent">AI Custom Software Development Company</span> */}
           </div>
 
           {/* Sliding Content */}
           <div className="min-h-[400px] flex flex-col justify-center">
             <div className="mb-6 flex justify-center">
-              <div className="text-primary animate-pulse">
-                {slides[currentSlide].icon}
-              </div>
+              <div className="text-primary animate-pulse">{slides[currentSlide].icon}</div>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
@@ -109,14 +140,14 @@ const HeroSection = () => {
               </Button>
             </Link>
             <Link to="/contact">
-
               <Button
                 size="lg"
                 variant="outline"
                 className="border-accent text-accent hover:bg-accent hover:text-accent-foreground hover:shadow-glow-accent transition-all duration-300"
               >
                 Quote Now
-              </Button></Link>
+              </Button>
+            </Link>
           </div>
 
           {/* Slide Indicators */}
@@ -125,10 +156,11 @@ const HeroSection = () => {
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide
-                  ? 'bg-primary scale-125'
-                  : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
-                  }`}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentSlide
+                    ? "bg-primary scale-125"
+                    : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                }`}
               />
             ))}
           </div>
