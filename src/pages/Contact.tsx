@@ -15,8 +15,21 @@ import {
   Globe,
   Send
 } from "lucide-react";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 const Contact = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [company, setCompany] = useState('');
+  const [service, setService] = useState('');
+  const [budget, setBudget] = useState('');
+  const [message, setMessage] = useState('');
+  const [formResult, setFormResult] = useState('');
+  const { toast } = useToast();
+
   const contactInfo = [
     {
       icon: <MapPin className="h-6 w-6" />,
@@ -75,6 +88,68 @@ const Contact = () => {
     }
   ];
 
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    setFormResult("Please wait...");
+
+    const formData = new FormData();
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("company", company);
+    formData.append("service", service);
+    formData.append("budget", budget);
+    formData.append("message", message);
+    formData.append("access_key", "c441252a-645a-4827-9d3d-02a9723d4e24"); // Replace with your actual access key ||| kkkkk
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.status === 200) {
+        toast({
+          title: "Success",
+          description: "Form submitted successfully!",
+        });
+        setFormResult("Form submitted successfully!");
+        // Clear form fields after successful submission
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setPhone('');
+        setCompany('');
+        setService('');
+        setBudget('');
+        setMessage('');
+      } else {
+        console.error(data);
+        toast({
+          title: "Error",
+          description: data.message || 'Something went wrong!',
+          variant: "destructive",
+        });
+        setFormResult(`Error: ${data.message || 'Something went wrong!'}`);
+      }
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Error",
+        description: "Something went wrong!",
+        variant: "destructive",
+      });
+      setFormResult("Something went wrong!");
+    } finally {
+      setTimeout(() => {
+        setFormResult("");
+      }, 5000); // Clear message after 5 seconds
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -123,67 +198,120 @@ const Contact = () => {
                 </p>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="firstName">First Name *</Label>
-                    <Input id="firstName" placeholder="Abu" className="mt-2" />
+                <form id="contactForm" onSubmit={handleSubmit}>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="firstName">First Name *</Label>
+                      <Input 
+                        id="firstName" 
+                        placeholder="Abu" 
+                        className="mt-2" 
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="lastName">Last Name *</Label>
+                      <Input 
+                        id="lastName" 
+                        placeholder="Hurayra" 
+                        className="mt-2" 
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        required
+                      />
+                    </div>
                   </div>
+                  
                   <div>
-                    <Label htmlFor="lastName">Last Name *</Label>
-                    <Input id="lastName" placeholder="Hurayra" className="mt-2" />
+                    <Label htmlFor="email">Email Address *</Label>
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      placeholder="abu hurayra@example.com" 
+                      className="mt-2" 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
                   </div>
-                </div>
-                
-                <div>
-                  <Label htmlFor="email">Email Address *</Label>
-                  <Input id="email" type="email" placeholder="abu hurayra@example.com" className="mt-2" />
-                </div>
-                
-                <div>
-                  <Label htmlFor="company">Company</Label>
-                  <Input id="company" placeholder="Your Company Name" className="mt-2" />
-                </div>
-                
-                <div>
-                  <Label htmlFor="service">Service of Interest</Label>
-                  <select 
-                    id="service" 
-                    className="w-full mt-2 px-3 py-2 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+
+                  <div>
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input 
+                      id="phone" 
+                      type="tel" 
+                      placeholder="01xxx-xxxxxx" 
+                      className="mt-2" 
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="company">Company</Label>
+                    <Input 
+                      id="company" 
+                      placeholder="Your Company Name" 
+                      className="mt-2" 
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
+                    />
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="service">Service of Interest</Label>
+                    <select 
+                      id="service" 
+                      className="w-full mt-2 px-3 py-2 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                      value={service}
+                      onChange={(e) => setService(e.target.value)}
+                    >
+                      <option value="">Select a service</option>
+                      {services.map((service) => (
+                        <option key={service} value={service}>{service}</option>
+                      ))}
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="budget">Project Budget</Label>
+                    <select 
+                      id="budget" 
+                      className="w-full mt-2 px-3 py-2 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                      value={budget}
+                      onChange={(e) => setBudget(e.target.value)}
+                    >
+                      <option value="">Select budget range</option>
+                      <option value="5k-15k">Below $99</option>
+                      <option value="15k-50k">$99 - $299</option>
+                      <option value="50k-100k">$499 - $1,999</option>
+                      <option value="100k+">Above $5,000</option>
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="message">Message *</Label>
+                    <Textarea 
+                      id="message" 
+                      placeholder="Tell us about your project, requirements, and timeline..."
+                      className="mt-2 min-h-[120px]"
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      required
+                    />
+                  </div>
+                  
+                  <Button 
+                    type="submit"
+                    className="w-full bg-gradient-primary text-primary-foreground hover:shadow-glow-primary"
                   >
-                    <option value="">Select a service</option>
-                    {services.map((service) => (
-                      <option key={service} value={service}>{service}</option>
-                    ))}
-                  </select>
-                </div>
-                
-                <div>
-                  <Label htmlFor="budget">Project Budget</Label>
-                  <select 
-                    id="budget" 
-                    className="w-full mt-2 px-3 py-2 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                  >
-                    <option value="">Select budget range</option>
-                    <option value="5k-15k">Below $99</option>
-                    <option value="15k-50k">$99 - $299</option>
-                    <option value="50k-100k">$499 - $1,999</option>
-                    <option value="100k+">Above $5,000</option>
-                  </select>
-                </div>
-                
-                <div>
-                  <Label htmlFor="message">Message *</Label>
-                  <Textarea 
-                    id="message" 
-                    placeholder="Tell us about your project, requirements, and timeline..."
-                    className="mt-2 min-h-[120px]"
-                  />
-                </div>
-                
-                <Button className="w-full bg-gradient-primary text-primary-foreground hover:shadow-glow-primary">
-                  Send Message
-                  <Send className="h-4 w-4 ml-2" />
-                </Button>
+                    Send Message
+                    <Send className="h-4 w-4 ml-2" />
+                  </Button>
+                  {formResult && <p className="mt-4 text-center">{formResult}</p>}
+                </form>
               </CardContent>
             </Card>
 

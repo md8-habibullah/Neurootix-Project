@@ -94,9 +94,9 @@ const HeroSection = () => {
       <div className="absolute top-32 right-16 animate-float" style={{ animationDelay: "1s" }}>
         <Database className="h-6 w-6 text-primary opacity-60" />
       </div>
-      <div className="absolute bottom-32 left-20 animate-float" style={{ animationDelay: "2s" }}>
+      {/* <div className="absolute bottom-32 left-20 animate-float" style={{ animationDelay: "2s" }}>
         <Bot className="h-10 w-10 text-accent opacity-60" />
-      </div>
+      </div> */}
 
       {/* Main Content */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">

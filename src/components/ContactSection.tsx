@@ -16,15 +16,57 @@ const ContactSection = () => {
     company: "",
     message: ""
   });
+  const [formResult, setFormResult] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to your backend
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for your inquiry. We'll get back to you within 24 hours.",
-    });
-    setFormData({ name: "", email: "", number: "", company: "", message: "" });
+    setFormResult("Please wait...");
+
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("number", formData.number);
+    formDataToSend.append("company", formData.company);
+    formDataToSend.append("message", formData.message);
+    formDataToSend.append("access_key", "c441252a-645a-4827-9d3d-02a9723d4e24"); // Replace with your actual access key ||| kkkkk
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataToSend,
+      });
+
+      const data = await response.json();
+
+      if (response.status === 200) {
+        toast({
+          title: "Success",
+          description: "Form submitted successfully!",
+        });
+        setFormResult("Form submitted successfully!");
+        setFormData({ name: "", email: "", number: "", company: "", message: "" }); // Clear the form
+      } else {
+        console.error(data);
+        toast({
+          title: "Error",
+          description: data.message || 'Something went wrong!',
+          variant: "destructive",
+        });
+        setFormResult(`Error: ${data.message || 'Something went wrong!'}`);
+      }
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Error",
+        description: "Something went wrong!",
+        variant: "destructive",
+      });
+      setFormResult("Something went wrong!");
+    } finally {
+      setTimeout(() => {
+        setFormResult("");
+      }, 5000); // Clear message after 5 seconds
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -181,6 +223,7 @@ const ContactSection = () => {
                   <Send className="h-4 w-4 mr-2" />
                   Send Message
                 </Button>
+                {formResult && <p className="mt-4 text-center">{formResult}</p>}
               </form>
             </CardContent>
           </Card>
