@@ -74,19 +74,19 @@ const ContactSection = () => {
     {
       icon: <MapPin className="h-5 w-5" />,
       title: "Headquarters",
-      details: ["123 Innovation Drive", "Tech Valley, CA 94025", "United States"],
+      details: ["Ashiyan City", "Airport - 1230, Dhaka", "Bangladesh"],
       color: "text-primary"
     },
     {
       icon: <Mail className="h-5 w-5" />,
       title: "Email Us",
-      details: ["hello@Neurootix.com", "support@Neurootix.com", "careers@Neurootix.com"],
+      details: ["neurootix@gmail.com", "Comming Soon", "We reply within 24 hours"],
       color: "text-accent"
     },
     {
       icon: <Phone className="h-5 w-5" />,
       title: "Call Us",
-      details: ["+1 (555) 123-4567", "+1 (555) 987-6543", "24/7 Support Available"],
+      details: ["Comming Soon", "Comming Soon too", "24/7 Support Available"],
       color: "text-primary"
     },
     {

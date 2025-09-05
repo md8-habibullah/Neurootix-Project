@@ -36,17 +36,17 @@ const Contact = () => {
     {
       icon: <MapPin className="h-6 w-6" />,
       title: "Headquarters",
-      details: ["123 Innovation Drive", "Tech District, City 12345", "United States"]
+      details: ["Ashiyan City", "Airport - 1230, Dhaka", "Bangladesh"]
     },
     {
       icon: <Phone className="h-6 w-6" />,
       title: "Phone",
-      details: ["+1 (555) 123-4567", "+1 (555) 765-4321"]
+      details: ["Comming Soon", "Comming Soon too"]
     },
     {
       icon: <Mail className="h-6 w-6" />,
       title: "Email",
-      details: ["hello@neurootix.com", "support@neurootix.com"]
+      details: ["neurootix@gmail.com", "Comming Soon"]
     },
     {
       icon: <Clock className="h-6 w-6" />,
