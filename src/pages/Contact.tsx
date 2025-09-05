@@ -18,6 +18,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import confetti from "canvas-confetti";
 
 const Contact = () => {
   const [firstName, setFirstName] = useState('');
@@ -55,9 +56,15 @@ const Contact = () => {
 
       if (response.status === 200) {
         toast({ title: "Success", description: "Form submitted successfully!" });
+        // Big Celebration
+        launchConfetti();
+
         setFormResult("Form submitted successfully!");
         setFirstName(''); setLastName(''); setEmail(''); setPhone('');
         setCompany(''); setService(''); setBudget(''); setMessage('');
+
+
+
       } else {
         toast({ title: "Error", description: data.message || 'Something went wrong!', variant: "destructive" });
         setFormResult(`Error: ${data.message || 'Something went wrong!'}`);
@@ -92,6 +99,24 @@ const Contact = () => {
       details: ["Sunday - Thursday: 9:00 AM - 6:00 PM", "Saturday: 10:00 AM - 4:00 PM", "Friday: Closed"]
     }
   ];
+
+  const launchConfetti = () => {
+    const duration = 5 * 1000; // 5 seconds
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+
+    const interval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+      }
+
+      const particleCount = 50 * (timeLeft / duration);
+      confetti({ ...defaults, particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 } });
+    }, 250);
+  };
+
 
   const services = [
     "Data Science",

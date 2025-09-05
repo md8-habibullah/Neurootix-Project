@@ -6,6 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Mail, Phone, Clock, Send, MessageSquare } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import confetti from "canvas-confetti";
+
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -82,6 +84,25 @@ const ContactSection = () => {
     formDataToSend.append("message", formData.message);
     formDataToSend.append("access_key", "c441252a-645a-4827-9d3d-02a9723d4e24"); // Replace with your key
 
+
+    const launchConfetti = () => {
+      const duration = 5 * 1000; // 5 seconds
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+
+      const interval = setInterval(() => {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+        }
+
+        const particleCount = 50 * (timeLeft / duration);
+        confetti({ ...defaults, particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 } });
+      }, 250);
+    };
+
+
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -95,6 +116,9 @@ const ContactSection = () => {
           title: "Success",
           description: "Form submitted successfully!",
         });
+
+        launchConfetti();
+
         setFormResult("Form submitted successfully!");
         setFormData({ name: "", email: "", number: "", company: "", message: "", honeypot: "" });
       } else {
