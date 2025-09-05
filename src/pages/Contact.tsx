@@ -44,7 +44,7 @@ const Contact = () => {
     {
       icon: <Mail className="h-6 w-6" />,
       title: "Email",
-      details: ["hello@neorootix.com", "support@neorootix.com"]
+      details: ["hello@neurootix.com", "support@neurootix.com"]
     },
     {
       icon: <Clock className="h-6 w-6" />,

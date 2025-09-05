@@ -82,7 +82,7 @@ const About = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-              About Neorootix
+              About Neurootix
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
               Where science meets software engineering to create the future
@@ -116,7 +116,7 @@ const About = () => {
             <h2 className="text-3xl font-bold mb-8 text-center">Company Overview</h2>
             <div className="prose prose-lg max-w-none text-muted-foreground">
               <p className="text-lg leading-relaxed">
-                Neorootix is a dynamic technology solutions provider, delivering innovative services in Data Science,
+                Neurootix is a dynamic technology solutions provider, delivering innovative services in Data Science,
                 ML/AI, Robotics/IoT, Cybersecurity, Graphics Design, Software Development, and Digital Marketing.
                 Founded by Mukim, a visionary Data Scientist and Graphics Designer, our firm is driven by a talented
                 team of experts.

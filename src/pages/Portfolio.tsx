@@ -84,7 +84,7 @@ const Portfolio = () => {
       name: "Sarah Johnson",
       company: "RetailTech Solutions",
       role: "CTO",
-      content: "Neorootix transformed our data infrastructure completely. The analytics dashboard they built has become the cornerstone of our decision-making process.",
+      content: "Neurootix transformed our data infrastructure completely. The analytics dashboard they built has become the cornerstone of our decision-making process.",
       rating: 5,
       service: "Data Science"
     },
@@ -226,7 +226,7 @@ const Portfolio = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Client Testimonials</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              What our clients say about working with Neorootix
+              What our clients say about working with Neurootix
             </p>
           </div>
           
