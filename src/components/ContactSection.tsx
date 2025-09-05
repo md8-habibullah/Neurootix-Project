@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Mail, Phone, Clock, Send, MessageSquare } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -20,7 +21,7 @@ const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormResult("Please wait...");
+    setFormResult("Submitting...");
 
     const formDataToSend = new FormData();
     formDataToSend.append("name", formData.name);
@@ -28,7 +29,7 @@ const ContactSection = () => {
     formDataToSend.append("number", formData.number);
     formDataToSend.append("company", formData.company);
     formDataToSend.append("message", formData.message);
-    formDataToSend.append("access_key", "c441252a-645a-4827-9d3d-02a9723d4e24"); // Replace with your actual access key ||| kkkkk
+    formDataToSend.append("access_key", "c441252a-645a-4827-9d3d-02a9723d4e24"); // replace with your key
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -44,9 +45,8 @@ const ContactSection = () => {
           description: "Form submitted successfully!",
         });
         setFormResult("Form submitted successfully!");
-        setFormData({ name: "", email: "", number: "", company: "", message: "" }); // Clear the form
+        setFormData({ name: "", email: "", number: "", company: "", message: "" });
       } else {
-        console.error(data);
         toast({
           title: "Error",
           description: data.message || 'Something went wrong!',
@@ -55,7 +55,6 @@ const ContactSection = () => {
         setFormResult(`Error: ${data.message || 'Something went wrong!'}`);
       }
     } catch (error) {
-      console.error(error);
       toast({
         title: "Error",
         description: "Something went wrong!",
@@ -63,17 +62,12 @@ const ContactSection = () => {
       });
       setFormResult("Something went wrong!");
     } finally {
-      setTimeout(() => {
-        setFormResult("");
-      }, 5000); // Clear message after 5 seconds
+      setTimeout(() => setFormResult(""), 5000);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const contactInfo = [
@@ -103,12 +97,21 @@ const ContactSection = () => {
     }
   ];
 
+  const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } };
+
   return (
     <section id="contact" className="py-20 bg-gradient-to-b from-background/50 to-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center space-x-2 bg-card/50 backdrop-blur-sm border border-accent/20 rounded-full px-4 py-2 mb-6">
+        <motion.div
+          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="inline-flex items-center space-x-2 bg-card/50 backdrop-blur-sm border border-accent/20 rounded-full px-4 py-2 mb-6 animate-pulse">
             <MessageSquare className="h-4 w-4 text-accent" />
             <span className="text-sm font-medium text-accent">Contact Our Lab</span>
           </div>
@@ -120,171 +123,110 @@ const ContactSection = () => {
             </span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            We're always excited to discuss new ideas and collaborations.
-            Reach out to explore how we can transform your vision into cutting-edge reality.
+            We're excited to discuss new ideas and collaborations. Reach out to explore how we can transform your vision into cutting-edge reality.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <Card className="bg-gradient-card border-border/50 shadow-card">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold text-foreground flex items-center gap-2">
-                <Send className="h-5 w-5 text-primary" />
-                Send a Message
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium text-foreground">
-                      Full Name *
-                    </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Your Name"
-                      required
-                      className="bg-muted/50 border-border focus:border-primary"
-                    />
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            transition={{ duration: 0.6 }}
+          >
+            <Card className="bg-gradient-card border-border/50 shadow-card hover:shadow-glow-accent/20 transition-all duration-300">
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold text-foreground flex items-center gap-2">
+                  <Send className="h-5 w-5 text-primary animate-bounce" />
+                  Send a Message
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <InputField label="Full Name *" name="name" value={formData.name} onChange={handleChange} placeholder="Your Name" />
+                    <InputField label="Phone Number *" name="number" value={formData.number} onChange={handleChange} placeholder="Phone Number" type="tel" />
                   </div>
-                  <div className="space-y-2">
-                    <label htmlFor="number" className="text-sm font-medium text-foreground">
-                      Phone Number *
-                    </label>
-                    <Input
-                      id="number"
-                      name="number"
-                      type="number"
-                      value={formData.number}
-                      onChange={handleChange}
-                      placeholder="Phone Number"
-                      required
-                      className="bg-muted/50 border-border focus:border-primary"
-                    />
-                  </div>
-                </div>
+                  <InputField label="Email Address *" name="email" value={formData.email} onChange={handleChange} placeholder="your@email.com" type="email" />
+                  <InputField label="Company/Organization" name="company" value={formData.company} onChange={handleChange} placeholder="Your Company" />
+                  <TextareaField label="Your Message *" name="message" value={formData.message} onChange={handleChange} placeholder="Describe your project or inquiry..." rows={6} />
 
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium text-foreground">
-                    Email Address *
-                  </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="your@email.com"
-                    required
-                    className="bg-muted/50 border-border focus:border-primary"
-                  />
-                </div>
-
-
-                <div className="space-y-2">
-                  <label htmlFor="company" className="text-sm font-medium text-foreground">
-                    Company/Organization
-                  </label>
-                  <Input
-                    id="company"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleChange}
-                    placeholder="Your Company"
-                    className="bg-muted/50 border-border focus:border-primary"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium text-foreground">
-                    Your Message *
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Describe your project or inquiry..."
-                    rows={6}
-                    required
-                    className="bg-muted/50 border-border focus:border-primary resize-none"
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full bg-gradient-primary hover:shadow-glow-primary transition-all duration-300"
-                >
-                  <Send className="h-4 w-4 mr-2" />
-                  Send Message
-                </Button>
-                {formResult && <p className="mt-4 text-center">{formResult}</p>}
-              </form>
-            </CardContent>
-          </Card>
+                  <Button type="submit" size="lg" className="w-full bg-gradient-primary hover:shadow-glow-primary transition-all duration-300 flex items-center justify-center gap-2">
+                    <Send className="h-4 w-4" /> Send Message
+                  </Button>
+                  {formResult && <p className="mt-4 text-center text-sm text-muted-foreground animate-pulse">{formResult}</p>}
+                </form>
+              </CardContent>
+            </Card>
+          </motion.div>
 
           {/* Contact Information */}
           <div className="space-y-6">
-            {contactInfo.map((info, index) => (
-              <Card
-                key={index}
-                className="bg-gradient-card border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 hover:-translate-y-1 group"
+            {contactInfo.map((info, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.15, duration: 0.6 }}
               >
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
+                <Card className="bg-gradient-card border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 hover:-translate-y-1 group">
+                  <CardContent className="p-6 flex items-start space-x-4">
                     <div className={`${info.color} bg-muted/20 p-3 rounded-lg group-hover:animate-pulse`}>
                       {info.icon}
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-semibold text-foreground mb-2">
-                        {info.title}
-                      </h3>
+                      <h3 className="font-semibold text-foreground mb-2">{info.title}</h3>
                       <div className="space-y-1">
-                        {info.details.map((detail, detailIndex) => (
-                          <p key={detailIndex} className="text-sm text-muted-foreground">
-                            {detail}
-                          </p>
+                        {info.details.map((detail, dIdx) => (
+                          <p key={dIdx} className="text-sm text-muted-foreground">{detail}</p>
                         ))}
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-
-            {/* Response Time Badge */}
-              {/* <div className="bg-gradient-card rounded-lg p-6 border border-border/50 shadow-card">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-semibold text-foreground">Response Guarantee</h3>
-                  <Badge className="bg-accent text-accent-foreground">
-                    24 Hour Response
-                  </Badge>
-                </div>
-                <div className="space-y-3">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">General Inquiries</span>
-                    <span className="text-accent font-medium">Within 4 hours</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Project Consultations</span>
-                    <span className="text-primary font-medium">Within 24 hours</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Technical Support</span>
-                    <span className="text-accent font-medium">Within 2 hours</span>
-                  </div>
-                </div>
-              </div> */}
           </div>
         </div>
       </div>
     </section>
   );
 };
+
+// Helper components
+const InputField = ({ label, name, value, onChange, placeholder, type = "text" }: any) => (
+  <div className="space-y-2">
+    <label htmlFor={name} className="text-sm font-medium text-foreground">{label}</label>
+    <Input
+      id={name}
+      name={name}
+      type={type}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      required={label.includes("*")}
+      className="bg-muted/50 border-border focus:border-primary transition-all duration-300"
+    />
+  </div>
+);
+
+const TextareaField = ({ label, name, value, onChange, placeholder, rows }: any) => (
+  <div className="space-y-2">
+    <label htmlFor={name} className="text-sm font-medium text-foreground">{label}</label>
+    <Textarea
+      id={name}
+      name={name}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      rows={rows}
+      required={label.includes("*")}
+      className="bg-muted/50 border-border focus:border-primary resize-none transition-all duration-300"
+    />
+  </div>
+);
 
 export default ContactSection;

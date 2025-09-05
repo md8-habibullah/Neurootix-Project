@@ -5,18 +5,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { 
-  MapPin, 
-  Phone, 
-  Mail, 
-  Clock, 
-  MessageSquare, 
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  MessageSquare,
   Headphones,
   Globe,
   Send
 } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import { motion } from "framer-motion";
+
 
 const Contact = () => {
   const [firstName, setFirstName] = useState('');
@@ -88,7 +90,7 @@ const Contact = () => {
     }
   ];
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormResult("Please wait...");
 
@@ -153,12 +155,16 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="pt-24 pb-16 bg-gradient-subtle">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center"
+          >            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
               Contact Us
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
@@ -178,14 +184,17 @@ const Contact = () => {
                 Instant Response
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Contact Form & Info */}
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }} className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Contact Form */}
             <Card className="border-0 shadow-glow-primary bg-card/50 backdrop-blur-sm">
               <CardHeader>
@@ -202,10 +211,10 @@ const Contact = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="firstName">First Name *</Label>
-                      <Input 
-                        id="firstName" 
-                        placeholder="Abu" 
-                        className="mt-2" 
+                      <Input
+                        id="firstName"
+                        placeholder="Abu"
+                        className="mt-2"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         required
@@ -213,24 +222,24 @@ const Contact = () => {
                     </div>
                     <div>
                       <Label htmlFor="lastName">Last Name *</Label>
-                      <Input 
-                        id="lastName" 
-                        placeholder="Hurayra" 
-                        className="mt-2" 
+                      <Input
+                        id="lastName"
+                        placeholder="Hurayra"
+                        className="mt-2"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         required
                       />
                     </div>
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="email">Email Address *</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="abu hurayra@example.com" 
-                      className="mt-2" 
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="abu hurayra@example.com"
+                      className="mt-2"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
@@ -239,31 +248,31 @@ const Contact = () => {
 
                   <div>
                     <Label htmlFor="phone">Phone Number</Label>
-                    <Input 
-                      id="phone" 
-                      type="tel" 
-                      placeholder="01xxx-xxxxxx" 
-                      className="mt-2" 
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="01xxx-xxxxxx"
+                      className="mt-2"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                     />
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="company">Company</Label>
-                    <Input 
-                      id="company" 
-                      placeholder="Your Company Name" 
-                      className="mt-2" 
+                    <Input
+                      id="company"
+                      placeholder="Your Company Name"
+                      className="mt-2"
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
                     />
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="service">Service of Interest</Label>
-                    <select 
-                      id="service" 
+                    <select
+                      id="service"
                       className="w-full mt-2 px-3 py-2 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                       value={service}
                       onChange={(e) => setService(e.target.value)}
@@ -274,11 +283,11 @@ const Contact = () => {
                       ))}
                     </select>
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="budget">Project Budget</Label>
-                    <select 
-                      id="budget" 
+                    <select
+                      id="budget"
                       className="w-full mt-2 px-3 py-2 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                       value={budget}
                       onChange={(e) => setBudget(e.target.value)}
@@ -290,11 +299,11 @@ const Contact = () => {
                       <option value="100k+">Above $5,000</option>
                     </select>
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="message">Message *</Label>
-                    <Textarea 
-                      id="message" 
+                    <Textarea
+                      id="message"
                       placeholder="Tell us about your project, requirements, and timeline..."
                       className="mt-2 min-h-[120px]"
                       value={message}
@@ -302,8 +311,8 @@ const Contact = () => {
                       required
                     />
                   </div>
-                  
-                  <Button 
+
+                  <Button
                     type="submit"
                     className="w-full bg-gradient-primary text-primary-foreground hover:shadow-glow-primary"
                   >
@@ -320,34 +329,40 @@ const Contact = () => {
               <div>
                 <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  We're here to help you transform your business with cutting-edge technology solutions. 
+                  We're here to help you transform your business with cutting-edge technology solutions.
                   Reach out to discuss your project requirements and learn how our expert team can help you achieve your goals.
                 </p>
               </div>
 
               <div className="grid gap-6">
                 {contactInfo.map((info, index) => (
-                  <Card key={index} className="border-0 bg-muted/30">
-                    <CardContent className="p-6">
-                      <div className="flex items-start space-x-4">
-                        <div className="bg-gradient-primary p-3 rounded-lg text-primary-foreground">
-                          {info.icon}
+                  <motion.div initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.15 }}
+                  >
+                    <Card key={index} className="border-0 bg-muted/30">
+                      <CardContent className="p-6">
+                        <div className="flex items-start space-x-4">
+                          <div className="bg-gradient-primary p-3 rounded-lg text-primary-foreground">
+                            {info.icon}
+                          </div>
+                          <div>
+                            <h3 className="font-semibold mb-2">{info.title}</h3>
+                            {info.details.map((detail, idx) => (
+                              <p key={idx} className="text-muted-foreground text-sm">
+                                {detail}
+                              </p>
+                            ))}
+                          </div>
                         </div>
-                        <div>
-                          <h3 className="font-semibold mb-2">{info.title}</h3>
-                          {info.details.map((detail, idx) => (
-                            <p key={idx} className="text-muted-foreground text-sm">
-                              {detail}
-                            </p>
-                          ))}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -360,8 +375,10 @@ const Contact = () => {
               Multiple ways to get help when you need it most
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+
+          <motion.div whileHover={{ scale: 1.05, y: -5 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {supportOptions.map((option, index) => (
               <Card key={index} className="text-center border-0 shadow-elegant bg-card/80 backdrop-blur-sm">
                 <CardContent className="p-8">
@@ -370,7 +387,7 @@ const Contact = () => {
                   </div>
                   <h3 className="text-xl font-semibold mb-3">{option.title}</h3>
                   <p className="text-muted-foreground mb-6">{option.description}</p>
-                  <Button 
+                  <Button
                     variant={option.available ? "default" : "outline"}
                     className={option.available ? "bg-gradient-primary text-primary-foreground hover:shadow-glow-primary" : ""}
                     disabled={!option.available}
@@ -380,36 +397,10 @@ const Contact = () => {
                 </CardContent>
               </Card>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
-
-      {/* Map Section */}
-      {/* <section className="py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Visit Our Office</h2>
-              <p className="text-xl text-muted-foreground">
-                Located in the heart of the tech district
-              </p>
-            </div>
-            
-            <Card className="border-0 shadow-elegant overflow-hidden">
-              <div className="h-96 bg-gradient-primary/10 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="h-16 w-16 text-primary/60 mx-auto mb-4" />
-                  <p className="text-muted-foreground">Interactive Map Coming Soon</p>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    123 Innovation Drive, Tech District, City 12345
-                  </p>
-                </div>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section> */}
-
+      {/* Footer below */}
       <Footer />
     </div>
   );
