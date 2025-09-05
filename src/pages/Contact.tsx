@@ -1,7 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -15,10 +14,10 @@ import {
   Globe,
   Send
 } from "lucide-react";
-import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { motion } from "framer-motion";
-
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const Contact = () => {
   const [firstName, setFirstName] = useState('');
@@ -31,6 +30,45 @@ const Contact = () => {
   const [message, setMessage] = useState('');
   const [formResult, setFormResult] = useState('');
   const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormResult("Please wait...");
+
+    const formData = new FormData();
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("company", company);
+    formData.append("service", service);
+    formData.append("budget", budget);
+    formData.append("message", message);
+    formData.append("access_key", "c441252a-645a-4827-9d3d-02a9723d4e24");
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await response.json();
+
+      if (response.status === 200) {
+        toast({ title: "Success", description: "Form submitted successfully!" });
+        setFormResult("Form submitted successfully!");
+        setFirstName(''); setLastName(''); setEmail(''); setPhone('');
+        setCompany(''); setService(''); setBudget(''); setMessage('');
+      } else {
+        toast({ title: "Error", description: data.message || 'Something went wrong!', variant: "destructive" });
+        setFormResult(`Error: ${data.message || 'Something went wrong!'}`);
+      }
+    } catch (error) {
+      toast({ title: "Error", description: "Something went wrong!", variant: "destructive" });
+      setFormResult("Something went wrong!");
+    } finally {
+      setTimeout(() => setFormResult(""), 5000);
+    }
+  };
 
   const contactInfo = [
     {
@@ -90,68 +128,6 @@ const Contact = () => {
     }
   ];
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFormResult("Please wait...");
-
-    const formData = new FormData();
-    formData.append("firstName", firstName);
-    formData.append("lastName", lastName);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("company", company);
-    formData.append("service", service);
-    formData.append("budget", budget);
-    formData.append("message", message);
-    formData.append("access_key", "c441252a-645a-4827-9d3d-02a9723d4e24"); // Replace with your actual access key ||| kkkkk
-
-    try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await response.json();
-
-      if (response.status === 200) {
-        toast({
-          title: "Success",
-          description: "Form submitted successfully!",
-        });
-        setFormResult("Form submitted successfully!");
-        // Clear form fields after successful submission
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setPhone('');
-        setCompany('');
-        setService('');
-        setBudget('');
-        setMessage('');
-      } else {
-        console.error(data);
-        toast({
-          title: "Error",
-          description: data.message || 'Something went wrong!',
-          variant: "destructive",
-        });
-        setFormResult(`Error: ${data.message || 'Something went wrong!'}`);
-      }
-    } catch (error) {
-      console.error(error);
-      toast({
-        title: "Error",
-        description: "Something went wrong!",
-        variant: "destructive",
-      });
-      setFormResult("Something went wrong!");
-    } finally {
-      setTimeout(() => {
-        setFormResult("");
-      }, 5000); // Clear message after 5 seconds
-    }
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -164,7 +140,8 @@ const Contact = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto text-center"
-          >            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
+          >
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
               Contact Us
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
@@ -191,10 +168,13 @@ const Contact = () => {
       {/* Contact Form & Info */}
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 40 }}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }} className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto"
+          >
             {/* Contact Form */}
             <Card className="border-0 shadow-glow-primary bg-card/50 backdrop-blur-sm">
               <CardHeader>
@@ -207,68 +187,29 @@ const Contact = () => {
                 </p>
               </CardHeader>
               <CardContent className="space-y-6">
-                <form id="contactForm" onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="firstName">First Name *</Label>
-                      <Input
-                        id="firstName"
-                        placeholder="Abu"
-                        className="mt-2"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        required
-                      />
+                      <Input id="firstName" placeholder="Abu" className="mt-2" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
                     </div>
                     <div>
                       <Label htmlFor="lastName">Last Name *</Label>
-                      <Input
-                        id="lastName"
-                        placeholder="Hurayra"
-                        className="mt-2"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        required
-                      />
+                      <Input id="lastName" placeholder="Hurayra" className="mt-2" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
                     </div>
                   </div>
-
                   <div>
                     <Label htmlFor="email">Email Address *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="abu hurayra@example.com"
-                      className="mt-2"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                    />
+                    <Input id="email" type="email" placeholder="example@email.com" className="mt-2" value={email} onChange={(e) => setEmail(e.target.value)} required />
                   </div>
-
                   <div>
                     <Label htmlFor="phone">Phone Number</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      placeholder="01xxx-xxxxxx"
-                      className="mt-2"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
+                    <Input id="phone" type="tel" placeholder="01xxx-xxxxxx" className="mt-2" value={phone} onChange={(e) => setPhone(e.target.value)} />
                   </div>
-
                   <div>
                     <Label htmlFor="company">Company</Label>
-                    <Input
-                      id="company"
-                      placeholder="Your Company Name"
-                      className="mt-2"
-                      value={company}
-                      onChange={(e) => setCompany(e.target.value)}
-                    />
+                    <Input id="company" placeholder="Your Company Name" className="mt-2" value={company} onChange={(e) => setCompany(e.target.value)} />
                   </div>
-
                   <div>
                     <Label htmlFor="service">Service of Interest</Label>
                     <select
@@ -283,7 +224,6 @@ const Contact = () => {
                       ))}
                     </select>
                   </div>
-
                   <div>
                     <Label htmlFor="budget">Project Budget</Label>
                     <select
@@ -299,23 +239,18 @@ const Contact = () => {
                       <option value="100k+">Above $5,000</option>
                     </select>
                   </div>
-
                   <div>
                     <Label htmlFor="message">Message *</Label>
                     <Textarea
                       id="message"
-                      placeholder="Tell us about your project, requirements, and timeline..."
+                      placeholder="Tell us about your project..."
                       className="mt-2 min-h-[120px]"
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       required
                     />
                   </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full bg-gradient-primary text-primary-foreground hover:shadow-glow-primary"
-                  >
+                  <Button type="submit" className="w-full bg-gradient-primary text-primary-foreground hover:shadow-glow-primary">
                     Send Message
                     <Send className="h-4 w-4 ml-2" />
                   </Button>
@@ -330,31 +265,27 @@ const Contact = () => {
                 <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
                 <p className="text-muted-foreground text-lg leading-relaxed">
                   We're here to help you transform your business with cutting-edge technology solutions.
-                  Reach out to discuss your project requirements and learn how our expert team can help you achieve your goals.
                 </p>
               </div>
-
               <div className="grid gap-6">
                 {contactInfo.map((info, index) => (
-                  <motion.div initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.15 }}
                   >
-                    <Card key={index} className="border-0 bg-muted/30">
-                      <CardContent className="p-6">
-                        <div className="flex items-start space-x-4">
-                          <div className="bg-gradient-primary p-3 rounded-lg text-primary-foreground">
-                            {info.icon}
-                          </div>
-                          <div>
-                            <h3 className="font-semibold mb-2">{info.title}</h3>
-                            {info.details.map((detail, idx) => (
-                              <p key={idx} className="text-muted-foreground text-sm">
-                                {detail}
-                              </p>
-                            ))}
-                          </div>
+                    <Card className="border-0 bg-muted/30">
+                      <CardContent className="p-6 flex items-start space-x-4">
+                        <div className="bg-gradient-primary p-3 rounded-lg text-primary-foreground">
+                          {info.icon}
+                        </div>
+                        <div>
+                          <h3 className="font-semibold mb-2">{info.title}</h3>
+                          {info.details.map((detail, idx) => (
+                            <p key={idx} className="text-muted-foreground text-sm">{detail}</p>
+                          ))}
                         </div>
                       </CardContent>
                     </Card>
@@ -375,7 +306,6 @@ const Contact = () => {
               Multiple ways to get help when you need it most
             </p>
           </div>
-
           <motion.div whileHover={{ scale: 1.05, y: -5 }}
             transition={{ type: "spring", stiffness: 200 }}
             className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
@@ -400,7 +330,6 @@ const Contact = () => {
           </motion.div>
         </div>
       </section>
-      {/* Footer below */}
       <Footer />
     </div>
   );
