@@ -172,7 +172,7 @@ const ServicesSection = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
         >
-          <div className="bg-gradient-card rounded-2xl p-8 border border-border/50 shadow-card max-w-4xl mx-auto">
+          {/* <div className="bg-gradient-card rounded-2xl p-8 border border-border/50 shadow-card max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold mb-4 text-foreground">Integrated Tech Ecosystem</h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
               Our services work together seamlessly, allowing us to deliver comprehensive solutions
@@ -193,7 +193,7 @@ const ServicesSection = () => {
                 </Button>
               </motion.div>
             </div>
-          </div>
+          </div> */}
         </motion.div>
       </div>
     </section>

@@ -97,7 +97,7 @@ const TestimonialsSection = () => {
           ))}
         </div>
 
-        {/* CTA Section */}
+        {/* CTA Section
         <motion.div
           className="text-center mt-16"
           initial={{ opacity: 0, y: 40 }}
@@ -121,7 +121,7 @@ const TestimonialsSection = () => {
               </button>
             </div>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );
