@@ -22,6 +22,8 @@ const ContactSection = () => {
   const [formResult, setFormResult] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const lastSubmitRef = useRef(0); // track last submission time
+  const [showParty, setShowParty] = useState(false);
+
 
   const validateForm = () => {
     // Basic spam/bot detection
@@ -118,6 +120,9 @@ const ContactSection = () => {
         });
 
         launchConfetti();
+        setShowParty(true);
+        setTimeout(() => setShowParty(false), 5000);
+
 
         setFormResult("Form submitted successfully!");
         setFormData({ name: "", email: "", number: "", company: "", message: "", honeypot: "" });
@@ -152,14 +157,20 @@ const ContactSection = () => {
   };
 
   const contactInfo = [
-    { icon: <MapPin className="h-5 w-5" />, title: "Headquarters", details: ["123 Innovation Drive", "Tech Valley, CA 94025", "United States"], color: "text-primary" },
-    { icon: <Mail className="h-5 w-5" />, title: "Email Us", details: ["hello@Neurootix.com", "support@Neurootix.com", "careers@Neurootix.com"], color: "text-accent" },
-    { icon: <Phone className="h-5 w-5" />, title: "Call Us", details: ["+1 (555) 123-4567", "+1 (555) 987-6543", "24/7 Support Available"], color: "text-primary" },
-    { icon: <Clock className="h-5 w-5" />, title: "Business Hours", details: ["Sun - Thu: 9:00 AM - 6:00 PM PST", "Weekend Support Available", "Emergency: 24/7"], color: "text-accent" }
+    { icon: <MapPin className="h-5 w-5" />, title: "Headquarters", details: ["Ashiyan City", "Airport - 1230, Dhaka", "Bangladesh"], color: "text-primary" },
+    { icon: <Mail className="h-5 w-5" />, title: "Email Us", details: ["neurootix@gmail.com", "Coming Soon"], color: "text-accent" },
+    { icon: <Phone className="h-5 w-5" />, title: "Call Us", details: ["Coming Soon", "Coming Soon too", "24/7 Support Available"], color: "text-primary" },
+    { icon: <Clock className="h-5 w-5" />, title: "Business Hours", details: ["Sun - Thu: 9:00 AM - 6:00 PM", "Weekend Support Available", "Emergency: 24/7"], color: "text-accent" }
   ];
 
   return (
     <section id="contact" className="py-20 bg-gradient-to-b from-background/50 to-background">
+      {showParty && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 text-4xl font-bold text-white">
+          🎉 Thank you for submitting! 🎉
+        </div>
+      )}
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">

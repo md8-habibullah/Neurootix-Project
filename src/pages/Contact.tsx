@@ -32,6 +32,10 @@ const Contact = () => {
   const [formResult, setFormResult] = useState('');
   const { toast } = useToast();
 
+  const [showParty, setShowParty] = useState(false);
+
+
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormResult("Please wait...");
@@ -58,6 +62,8 @@ const Contact = () => {
         toast({ title: "Success", description: "Form submitted successfully!" });
         // Big Celebration
         launchConfetti();
+        setShowParty(true);
+        setTimeout(() => setShowParty(false), 5000);
 
         setFormResult("Form submitted successfully!");
         setFirstName(''); setLastName(''); setEmail(''); setPhone('');
@@ -86,12 +92,12 @@ const Contact = () => {
     {
       icon: <Phone className="h-6 w-6" />,
       title: "Phone",
-      details: ["Comming Soon", "Comming Soon too"]
+      details: ["Coming Soon", "Coming Soon Too"]
     },
     {
       icon: <Mail className="h-6 w-6" />,
       title: "Email",
-      details: ["neurootix@gmail.com", "Comming Soon"]
+      details: ["neurootix@gmail.com", "Coming Soon"]
     },
     {
       icon: <Clock className="h-6 w-6" />,
@@ -156,6 +162,12 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      {showParty && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 text-4xl font-bold text-white">
+          🎉 Thank you for submitting! 🎉
+        </div>
+      )}
+
 
       {/* Hero Section */}
       <section className="pt-24 pb-16 bg-gradient-subtle">

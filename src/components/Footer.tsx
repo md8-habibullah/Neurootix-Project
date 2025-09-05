@@ -68,11 +68,11 @@ const Footer = () => {
               </div>
               <div className="flex items-center text-sm text-muted-foreground">
                 <Phone className="h-4 w-4 mr-2 text-primary" />
-                Comming Soon
+                Coming Soon
               </div>
               <div className="flex items-center text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 mr-2 text-accent" />
-                Tech Valley, CA 94025
+                Airport - 1230, Dhaka
               </div>
             </div>
 
