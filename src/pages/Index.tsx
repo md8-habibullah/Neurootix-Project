@@ -8,21 +8,58 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 // import TeamSection from "@/components/TeamSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import { motion } from "framer-motion";
+import { fadeInUp, fadeInScale, staggerContainer } from "@/lib/animations";
+import { easeInOut } from "framer-motion";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={staggerContainer}
+      className="min-h-screen bg-background"
+    >
       <Navigation />
-      <HeroSection />
-      <ServicesSection />
-      <AISolutionsSection />
-      <AboutSection />
-      <PricingSection />
-      <TestimonialsSection />
-      {/* <TeamSection /> */}
-      <ContactSection />
+
+      <motion.section
+        variants={fadeInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <HeroSection />
+      </motion.section>
+
+
+      <motion.section variants={fadeInUp}>
+        <ServicesSection />
+      </motion.section>
+
+      <motion.section variants={fadeInUp}>
+        <AISolutionsSection />
+      </motion.section>
+
+      <motion.section variants={fadeInScale}>
+        <AboutSection />
+      </motion.section>
+
+      <motion.section variants={fadeInUp}>
+        <PricingSection />
+      </motion.section>
+
+      <motion.section variants={fadeInUp}>
+        <TestimonialsSection />
+      </motion.section>
+
+      {/* <motion.section variants={fadeInScale}><TeamSection /></motion.section> */}
+
+      <motion.section variants={fadeInUp}>
+        <ContactSection />
+      </motion.section>
+
       <Footer />
-    </div>
+    </motion.div>
   );
 };
 

@@ -3,6 +3,8 @@ import { ArrowRight, Brain, Bot, Database, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Hyperspeed from "@/Hyperspeed";
+import { AnimatePresence, motion } from "framer-motion";
+
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -42,7 +44,9 @@ const HeroSection = () => {
   }, [slides.length]);
 
   return (
-    <section
+    <motion.section initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero"
     >
@@ -108,28 +112,36 @@ const HeroSection = () => {
           </div>
 
           {/* Sliding Content */}
-          <div className="min-h-[400px] flex flex-col justify-center">
-            <div className="mb-6 flex justify-center">
-              <div className="text-primary animate-pulse">{slides[currentSlide].icon}</div>
-            </div>
+          <AnimatePresence mode="wait">
+            <motion.div initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="min-h-[400px] flex flex-col justify-center">
+              <div className="mb-6 flex justify-center">
+                <div className="text-primary animate-pulse">{slides[currentSlide].icon}</div>
+              </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="bg-gradient-primary bg-clip-text text-transparent">
-                {slides[currentSlide].title}
-              </span>
-            </h1>
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+                <span className="bg-gradient-primary bg-clip-text text-transparent">
+                  {slides[currentSlide].title}
+                </span>
+              </h1>
 
-            <p className="text-xl sm:text-2xl lg:text-3xl text-accent mb-4 font-semibold">
-              {slides[currentSlide].subtitle}
-            </p>
+              <p className="text-xl sm:text-2xl lg:text-3xl text-accent mb-4 font-semibold">
+                {slides[currentSlide].subtitle}
+              </p>
 
-            <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-              {slides[currentSlide].description}
-            </p>
-          </div>
+              <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+                {slides[currentSlide].description}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+          <motion.div whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }} className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <Link to="/contact">
               <Button
                 size="lg"
@@ -148,7 +160,7 @@ const HeroSection = () => {
                 Quote Now
               </Button>
             </Link>
-          </div>
+          </motion.div>
 
           {/* Slide Indicators */}
           <div className="flex justify-center space-x-2 mb-8">
@@ -156,17 +168,19 @@ const HeroSection = () => {
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentSlide
-                    ? "bg-primary scale-125"
-                    : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                }`}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide
+                  ? "bg-primary scale-125"
+                  : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                  }`}
               />
             ))}
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }} className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
             <div className="text-center">
               <div className="text-2xl sm:text-3xl font-bold text-primary mb-1">100+</div>
               <div className="text-sm text-muted-foreground">Clients Worldwide</div>
@@ -183,10 +197,10 @@ const HeroSection = () => {
               <div className="text-2xl sm:text-3xl font-bold text-accent mb-1">24/7</div>
               <div className="text-sm text-muted-foreground">Support</div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -4,13 +4,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { 
-  Brain, 
-  Smartphone, 
-  Database, 
-  Shield, 
-  Palette, 
-  Code, 
+import { motion } from "framer-motion";
+import {
+  Brain,
+  Smartphone,
+  Database,
+  Shield,
+  Palette,
+  Code,
   TrendingUp,
   Bot,
   Cpu,
@@ -80,11 +81,14 @@ const Services = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="pt-24 pb-16 bg-gradient-subtle">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
+          <motion.div initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
               Our Services
             </h1>
@@ -98,75 +102,88 @@ const Services = () => {
               <Badge variant="secondary" className="text-sm px-4 py-2">Cybersecurity</Badge>
               <Badge variant="secondary" className="text-sm px-4 py-2">Software Development</Badge>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Services Grid */}
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <motion.div whileHover={{ scale: 1.03, y: -5 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="group hover:shadow-glow-primary transition-all duration-300 border-0 bg-card/50 backdrop-blur-sm">
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="bg-gradient-primary p-3 rounded-lg text-primary-foreground">
-                        {service.icon}
-                      </div>
-                      <div>
-                        <CardTitle className="text-xl mb-2">{service.title}</CardTitle>
-                        <Badge variant="outline" className="text-xs">
-                          Led by {service.lead}
-                        </Badge>
-                      </div>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-6">
-                    {service.description}
-                  </p>
-                  
-                  <div className="mb-6">
-                    <h4 className="font-semibold mb-3 text-sm uppercase tracking-wide">Key Features</h4>
-                    <div className="grid grid-cols-2 gap-2">
-                      {service.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center text-sm text-muted-foreground">
-                          <div className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></div>
-                          {feature}
+              <motion.div initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+              >
+                <Card key={index} className="group hover:shadow-glow-primary transition-all duration-300 border-0 bg-card/50 backdrop-blur-sm">
+                  <CardHeader>
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center space-x-4">
+                        <div className="bg-gradient-primary p-3 rounded-lg text-primary-foreground">
+                          {service.icon}
                         </div>
-                      ))}
+                        <div>
+                          <CardTitle className="text-xl mb-2">{service.title}</CardTitle>
+                          <Badge variant="outline" className="text-xs">
+                            Led by {service.lead}
+                          </Badge>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className="mb-6">
-                    <h4 className="font-semibold mb-3 text-sm uppercase tracking-wide">Technologies</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {service.technologies.map((tech, idx) => (
-                        <Badge key={idx} variant="secondary" className="text-xs">
-                          {tech}
-                        </Badge>
-                      ))}
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground mb-6">
+                      {service.description}
+                    </p>
+
+                    <div className="mb-6">
+                      <h4 className="font-semibold mb-3 text-sm uppercase tracking-wide">Key Features</h4>
+                      <div className="grid grid-cols-2 gap-2">
+                        {service.features.map((feature, idx) => (
+                          <div key={idx} className="flex items-center text-sm text-muted-foreground">
+                            <div className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></div>
+                            {feature}
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  
-                  <Link to="/contact">
-                    <Button className="w-full bg-gradient-primary text-primary-foreground hover:shadow-glow-primary">
-                      Request Quote
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
+
+                    <div className="mb-6">
+                      <h4 className="font-semibold mb-3 text-sm uppercase tracking-wide">Technologies</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {service.technologies.map((tech, idx) => (
+                          <Badge key={idx} variant="secondary" className="text-xs">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    <Link to="/contact">
+                      <Button className="w-full bg-gradient-primary text-primary-foreground hover:shadow-glow-primary">
+                        Request Quote
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-16 bg-muted/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
+          <motion.div initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Business?</h2>
             <p className="text-xl text-muted-foreground mb-8">
               Let our expert team help you leverage cutting-edge technology to achieve your goals.
@@ -183,7 +200,7 @@ const Services = () => {
                 </Button>
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
