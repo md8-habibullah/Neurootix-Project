@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
 import { motion } from "framer-motion";
-
+import { useEffect } from "react";
 
 type Developer = {
     name: string;
@@ -45,10 +45,17 @@ const cardVariants = {
 };
 
 const Developers = () => {
+    useEffect(() => {
+        const vooo = document.getElementById('developers');
+        if (vooo) {
+            vooo.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, []);
+
     return (
         <>
             <Navigation />
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div id="developers" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <h1 className="text-3xl font-bold mb-12 text-center">Project Developers</h1>
 
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
