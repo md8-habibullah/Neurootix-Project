@@ -4,8 +4,17 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Target, Eye, Users } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 const About = () => {
+
+  useEffect(() => {
+    const vooo = document.getElementById('aboutneurootix');
+    if (vooo) {
+      vooo.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
   const teamMembers = [
     {
       name: "Mahdin Islam Mukim",
@@ -118,7 +127,7 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div id="aboutneurootix" className="min-h-screen bg-background">
       <Navigation />
 
       {/* Hero Section */}
@@ -130,7 +139,7 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
+            <h1 id="about" className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
               About Neurootix
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
@@ -259,7 +268,7 @@ const About = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
+            <h2 id = "team" className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
               Leadership Team
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">

@@ -3,6 +3,7 @@ import { Menu, X, Cpu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "@/assets/neurootix-logo-site.png"; // Ensure the logo is imported"
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,17 +28,14 @@ const Navigation = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <motion.div
-              whileHover={{ rotate: 15, scale: 1.1 }}
+          <Link to="/" className="flex items-center group">
+            <motion.img
+              src={logo}
+              alt="Neurootix Logo"
+              whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="bg-gradient-primary p-2 rounded-lg shadow-glow-primary"
-            >
-              <Cpu className="h-6 w-6 text-primary-foreground" />
-            </motion.div>
-            <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent group-hover:tracking-wide transition-all">
-              Neurootix
-            </span>
+              className="h-14 w-auto object-contain" // adjust size as needed
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -51,11 +49,10 @@ const Navigation = () => {
               >
                 <Link
                   to={item.href}
-                  className={`relative px-3 py-2 rounded-md text-foreground/80 hover:text-foreground transition-colors duration-200 ${
-                    location.pathname === item.href
+                  className={`relative px-3 py-2 rounded-md text-foreground/80 hover:text-foreground transition-colors duration-200 ${location.pathname === item.href
                       ? "text-primary bg-muted/50"
                       : ""
-                  }`}
+                    }`}
                 >
                   {item.name}
                   {location.pathname === item.href && (
@@ -108,11 +105,10 @@ const Navigation = () => {
                     key={item.name}
                     to={item.href}
                     onClick={closeMenu}
-                    className={`block w-full text-left px-3 py-2 rounded-md transition-colors ${
-                      location.pathname === item.href
+                    className={`block w-full text-left px-3 py-2 rounded-md transition-colors ${location.pathname === item.href
                         ? "text-primary bg-muted/50"
                         : "text-foreground/80 hover:text-foreground hover:bg-muted/50"
-                    }`}
+                      }`}
                   >
                     {item.name}
                   </Link>

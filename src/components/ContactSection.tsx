@@ -158,8 +158,8 @@ const ContactSection = () => {
 
   const contactInfo = [
     { icon: <MapPin className="h-5 w-5" />, title: "Headquarters", details: ["Ashiyan City", "Airport - 1230, Dhaka", "Bangladesh"], color: "text-primary" },
-    { icon: <Mail className="h-5 w-5" />, title: "Email Us", details: ["neurootix@gmail.com", "Coming Soon"], color: "text-accent" },
-    { icon: <Phone className="h-5 w-5" />, title: "Call Us", details: ["Coming Soon", "Coming Soon too", "24/7 Support Available"], color: "text-primary" },
+    { icon: <Mail className="h-5 w-5" />, title: "Email Us", details: ["contact@neurootix.com", "team@neurootix.com"], color: "text-accent" },
+    { icon: <Phone className="h-5 w-5" />, title: "Call Us", details: ["Coming Soon", "Coming Soon", "24/7 Support Available"], color: "text-primary" },
     { icon: <Clock className="h-5 w-5" />, title: "Business Hours", details: ["Sun - Thu: 9:00 AM - 6:00 PM", "Weekend Support Available", "Emergency: 24/7"], color: "text-accent" }
   ];
 

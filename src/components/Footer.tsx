@@ -1,44 +1,46 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Cpu, Mail, Phone, MapPin, Github, Linkedin, Twitter } from "lucide-react";
+import { Mail, Phone, MapPin, Github, Facebook } from "lucide-react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import logo from "@/assets/neurootix-logo-site.png"; // Ensure the logo is imported
 
 const Footer = () => {
+  
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
+
   const currentYear = new Date().getFullYear();
 
-  const footerSections = [
-    {
-      title: "Services",
-      links: [
-        { name: "AI & Machine Learning", href: "#products" },
-        { name: "Robotics Solutions", href: "#products" },
-        { name: "Data Science", href: "#products" },
-        { name: "Software Development", href: "#products" },
-        { name: "Mobile Apps", href: "#products" }
-      ]
-    },
-    {
-      title: "Company",
-      links: [
-        { name: "About Us", href: "#about" },
-        { name: "Our Team", href: "#team" },
-        { name: "Careers", href: "#" }]
-    },
-    {
-      title: "Resources",
-      links: [
-        { name: "Documentation", href: "#" },
-        { name: "Blog", href: "#" },
-        { name: "Support", href: "#contact" }
-      ]
-    }
-  ];
+  const navigate = useNavigate();
 
-  const scrollToSection = (href: string) => {
-    if (href.startsWith('#')) {
+  const scrollToSection = (href: string, route?: string) => {
+    if (href.startsWith("#")) {
       const element = document.querySelector(href);
-      element?.scrollIntoView({ behavior: "smooth" });
+
+      if (element) {
+        // Already on the page, just scroll
+        element.scrollIntoView({ behavior: "smooth" });
+      } else if (route) {
+        // Navigate to route + hash
+        navigate(`${route}${href}`);
+      }
+    } else {
+      // If it's a normal route
+      navigate(route || href);
     }
   };
+
 
   return (
     <footer className="bg-gradient-to-t from-background/80 to-background border-t border-border/50">
@@ -47,24 +49,26 @@ const Footer = () => {
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-2">
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="bg-gradient-primary p-2 rounded-lg shadow-glow-primary/50">
-                <Cpu className="h-6 w-6 text-primary-foreground" />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                Neurootix
-              </span>
+            <div className="flex items-center justify-start mb-6">
+              <motion.img
+                src={logo}
+                alt="Neurootix Logo"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className="h-16 w-auto object-contain"
+              />
             </div>
+
             <p className="text-muted-foreground mb-6 leading-relaxed max-w-md">
-              Pioneering the future through artificial intelligence, robotics, and cutting-edge technology.
-              Where innovation meets execution.
+              Pioneering the future through artificial intelligence, robotics,
+              and cutting-edge technology. Where innovation meets execution.
             </p>
 
             {/* Contact Info */}
             <div className="space-y-2 mb-6">
               <div className="flex items-center text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 mr-2 text-accent" />
-                neurootix@gmail.com
+                contact@neurootix.com
               </div>
               <div className="flex items-center text-sm text-muted-foreground">
                 <Phone className="h-4 w-4 mr-2 text-primary" />
@@ -78,50 +82,148 @@ const Footer = () => {
 
             {/* Social Links */}
             <div className="flex space-x-3">
-              <Button
-                size="sm"
-                variant="ghost"
-                className="h-9 w-9 p-0 hover:text-primary hover:bg-primary/10 hover:shadow-glow-primary/30"
+              <a href="mailto:contact@neurootix.com">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="h-9 w-9 p-0 hover:text-primary hover:bg-primary/10 hover:shadow-glow-primary/30"
+                >
+                  <Mail className="h-4 w-4" />
+                </Button>
+              </a>
+              <a href="https://github.com/md8-habibullah/Neurootix-Project.git">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="h-9 w-9 p-0 hover:text-accent hover:bg-accent/10 hover:shadow-glow-accent/30"
+                >
+                  <Github className="h-4 w-4" />
+                </Button>
+              </a>
+              <a
+                href="https://www.facebook.com/neurootix"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Linkedin className="h-4 w-4" />
-              </Button>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="h-9 w-9 p-0 hover:text-accent hover:bg-accent/10 hover:shadow-glow-accent/30"
-              >
-                <Github className="h-4 w-4" />
-              </Button>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="h-9 w-9 p-0 hover:text-primary hover:bg-primary/10 hover:shadow-glow-primary/30"
-              >
-                <Twitter className="h-4 w-4" />
-              </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="h-9 w-9 p-0 hover:text-primary hover:bg-primary/10 hover:shadow-glow-primary/30"
+                >
+                  <Facebook className="h-4 w-4" />
+                </Button>
+              </a>
             </div>
           </div>
 
-          {/* Footer Sections */}
-          {footerSections.map((section, index) => (
-            <div key={index}>
-              <h3 className="font-semibold text-foreground mb-4">
-                {section.title}
-              </h3>
-              <ul className="space-y-3">
-                {section.links.map((link, linkIndex) => (
-                  <li key={linkIndex}>
-                    <button
-                      onClick={() => scrollToSection(link.href)}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
-                    >
-                      {link.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Services Section */}
+          <div>
+            <h3 className="font-semibold text-foreground mb-4">Services</h3>
+            <ul className="space-y-3">
+              <li>
+                <button
+                  onClick={() => scrollToSection("#products")}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  AI & Machine Learning
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection("#products")}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  Robotics Solutions
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection("#products")}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  Data Science
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection("#products")}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  Software Development
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection("#products")}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  Mobile Apps
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Company Section */}
+          <div>
+            <h3 className="font-semibold text-foreground mb-4">Company</h3>
+            <ul className="space-y-3">
+              <li>
+                <button
+                  onClick={() => scrollToSection("#about", "/about")}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  About Us
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection("#team", "/about")}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  Our Team
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection("#")}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  Careers
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Resources Section */}
+          <div>
+            <h3 className="font-semibold text-foreground mb-4">Resources</h3>
+            <ul className="space-y-3">
+              <li>
+                <button
+                  onClick={() => scrollToSection("#")}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  Documentation
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection("#")}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  Blog
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection("#contact")}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  Support
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <Separator className="bg-border/50" />
@@ -129,7 +231,8 @@ const Footer = () => {
         {/* Bottom Footer */}
         <div className="py-8 flex flex-col md:flex-row justify-between items-center">
           <div className="text-sm text-muted-foreground mb-4 md:mb-0">
-            © {currentYear} Neurootix. All rights reserved.</div>
+            © {currentYear} Neurootix. All rights reserved.
+          </div>
 
           <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
             <div className="flex space-x-6 text-sm">

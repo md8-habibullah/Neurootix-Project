@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import {
   Brain,
   Smartphone,
@@ -19,6 +20,14 @@ import {
 } from "lucide-react";
 
 const Services = () => {
+
+  useEffect(() => {
+    const vooo = document.getElementById('ourservices');
+    if (vooo) {
+      vooo.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
   const services = [
     {
       icon: <Database className="h-8 w-8" />,
@@ -79,7 +88,7 @@ const Services = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div id="ourservices" className="min-h-screen bg-background">
       <Navigation />
 
       {/* Hero Section */}
@@ -89,7 +98,7 @@ const Services = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
+            <h1 id="" className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
               Our Services
             </h1>
             <p className="text-xl text-muted-foreground mb-8">

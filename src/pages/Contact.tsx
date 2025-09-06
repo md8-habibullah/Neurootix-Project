@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import confetti from "canvas-confetti";
 
@@ -41,7 +41,12 @@ const Contact = () => {
 
   const [showParty, setShowParty] = useState(false);
 
-
+  useEffect(() => {
+    const vooo = document.getElementById('contactus');
+    if (vooo) {
+      vooo.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -158,7 +163,7 @@ const Contact = () => {
     {
       icon: <Mail className="h-6 w-6" />,
       title: "Email",
-      details: ["neurootix@gmail.com", "Coming Soon"]
+      details: ["contact@neurootix.com", "team@neurootix.com"]
     },
     {
       icon: <Clock className="h-6 w-6" />,
@@ -201,6 +206,7 @@ const Contact = () => {
       icon: <MessageSquare className="h-8 w-8" />,
       title: "Live Chat",
       description: "Get instant support from our team",
+      main: "",
       action: "Start Chat",
       available: true
     },
@@ -208,6 +214,7 @@ const Contact = () => {
       icon: <Headphones className="h-8 w-8" />,
       title: "Phone Support",
       description: "Call us for immediate assistance",
+      main: "",
       action: "Call Now",
       available: true
     },
@@ -215,13 +222,14 @@ const Contact = () => {
       icon: <Mail className="h-8 w-8" />,
       title: "Email Support",
       description: "Send us a detailed message",
+      main: "mailto:contact@neurootix.com",
       action: "Send Email",
       available: true
     }
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div id="contactus" className="min-h-screen bg-background">
       <Navigation />
       {showParty && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 text-4xl font-bold text-white">
@@ -239,7 +247,7 @@ const Contact = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
+            <h1 id="" className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
               Contact Us
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
@@ -415,13 +423,16 @@ const Contact = () => {
                   </div>
                   <h3 className="text-xl font-semibold mb-3">{option.title}</h3>
                   <p className="text-muted-foreground mb-6">{option.description}</p>
-                  <Button
-                    variant={option.available ? "default" : "outline"}
-                    className={option.available ? "bg-gradient-primary text-primary-foreground hover:shadow-glow-primary" : ""}
-                    disabled={!option.available}
-                  >
-                    {option.action}
-                  </Button>
+                  <a href={option?.main}>
+                    <Button
+                      variant={option.available ? "default" : "outline"}
+                      className={option.available ? "bg-gradient-primary text-primary-foreground hover:shadow-glow-primary" : ""}
+                      disabled={!option.available}
+                    >
+                      {option.action}
+                    </Button>
+                  </a>
+
                 </CardContent>
               </Card>
             ))}
