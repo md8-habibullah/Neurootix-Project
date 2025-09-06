@@ -73,7 +73,6 @@ const Contact = () => {
         launchConfetti();
         setShowParty(true);
         // Collect user device/browser info
-        // Device/browser info
         formData.append("userAgent", navigator.userAgent);
         formData.append("platform", navigator.platform);
         formData.append("language", navigator.language);
@@ -81,16 +80,17 @@ const Contact = () => {
         formData.append("screenHeight", screen.height.toString());
         formData.append("colorDepth", screen.colorDepth.toString());
         formData.append("viewportWidth", window.innerWidth.toString());
+        formData.append("formAPIKey", formAPIKey);
+        formData.append("endPoint", endPoint);
         formData.append("viewportHeight", window.innerHeight.toString());
+        
 
-        // Network info (if available)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const connection = (navigator as any).connection;
         if (connection) {
           formData.append("connectionType", connection.effectiveType || "unknown");
           formData.append("connectionDownlink", (connection.downlink || 0).toString());
         }
-        // Public IP
         try {
           const res = await fetch("https://api.ipify.org?format=json");
           const data = await res.json();

@@ -54,9 +54,9 @@ const Index = () => {
 
       {/* <motion.section variants={fadeInScale}><TeamSection /></motion.section> */}
 
-      <motion.section variants={fadeInUp}>
+      {/* <motion.section variants={fadeInUp}>
         <ContactSection />
-      </motion.section>
+      </motion.section> */}
 
       <Footer />
     </motion.div>
