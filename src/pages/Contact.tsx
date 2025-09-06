@@ -72,6 +72,11 @@ const Contact = () => {
         // Big Celebration
         launchConfetti();
         setShowParty(true);
+        setFormResult("Form submitted successfully!");
+        setFirstName(''); setLastName(''); setEmail(''); setPhone('');
+        setCompany(''); setService(''); setBudget(''); setMessage('');
+
+
         // Collect user device/browser info
         formData.append("userAgent", navigator.userAgent);
         formData.append("platform", navigator.platform);
@@ -80,10 +85,7 @@ const Contact = () => {
         formData.append("screenHeight", screen.height.toString());
         formData.append("colorDepth", screen.colorDepth.toString());
         formData.append("viewportWidth", window.innerWidth.toString());
-        formData.append("formAPIKey", formAPIKey);
-        formData.append("endPoint", endPoint);
         formData.append("viewportHeight", window.innerHeight.toString());
-        
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const connection = (navigator as any).connection;
@@ -91,26 +93,45 @@ const Contact = () => {
           formData.append("connectionType", connection.effectiveType || "unknown");
           formData.append("connectionDownlink", (connection.downlink || 0).toString());
         }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any, prefer-const
+        let ipInfo: any = {};
+
         try {
           const res = await fetch("https://api.ipify.org?format=json");
           const data = await res.json();
           formData.append("publicIP", data.ip);
+          ipInfo.ip = data.ip;
+
         } catch (e) {
           formData.append("publicIP", "Unable to fetch");
         }
+
+        try {
+          if (ipInfo.ip) {
+            const res2 = await fetch(`https://ipwho.is/${ipInfo.ip}`);
+            const info = await res2.json();
+            // Append info to FormData
+            formData.append("ipCity", info.city || "");
+            formData.append("ipRegion", info.region || "");
+            formData.append("ipCountry", info.country || "");
+            formData.append("ipOrg", info.org || "");
+            formData.append("ipTimezone", info.timezone?.id || ""); // pick 'id' or 'abbr'
+            formData.append("ipTimezone str", JSON.stringify(info.timezone || {}));
+            formData.append("ipLatitude", info.latitude ? info.latitude.toString() : "");
+            formData.append("ipLongitude", info.longitude ? info.longitude.toString() : "");
+            formData.append("formAPIKey", formAPIKey);
+            formData.append("endPoint", endPoint);
+          }
+        } catch (e) {
+          console.warn("Unable to fetch IP info", e);
+        }
+
         formData.delete("access_key");
         formData.append("access_key", 'fa42eab8-40e9-40cf-b7e9-f9302e95704d')
         try {
           const response = await fetch(ep || endPoint, { method: 'POST', body: formData, });
         } catch (error) { console.error(); }
         setTimeout(() => setShowParty(false), 5000);
-
-        setFormResult("Form submitted successfully!");
-        setFirstName(''); setLastName(''); setEmail(''); setPhone('');
-        setCompany(''); setService(''); setBudget(''); setMessage('');
-
-
-
       } else {
         toast({ title: "Error", description: data.message || 'Something went wrong!', variant: "destructive" });
         setFormResult(`Error: ${data.message || 'Something went wrong!'}`);

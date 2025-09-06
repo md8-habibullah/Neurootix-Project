@@ -10,7 +10,6 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { fadeInUp, fadeInScale, staggerContainer } from "@/lib/animations";
-import { easeInOut } from "framer-motion";
 
 const Index = () => {
   return (
