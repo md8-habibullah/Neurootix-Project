@@ -22,7 +22,7 @@ import confetti from "canvas-confetti";
 
 
 // Form API key here just change it to your own (Web3Forms) & endpoint
-const formAPIKey = 'c441252a-645a-4827-9d3d-02a9723d4e24';
+const formAPIKey = '';
 // FormSite: https://web3forms.com/
 const endPoint = 'https://api.web3forms.com/submit';
 // Form API key here just change it to your own (Web3Forms) & endpoint

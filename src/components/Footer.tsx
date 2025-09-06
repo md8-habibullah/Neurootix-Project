@@ -3,12 +3,13 @@ import { Separator } from "@/components/ui/separator";
 import { Mail, Phone, MapPin, Github, Facebook } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import logo from "@/assets/neurootix-logo-site.png"; // Ensure the logo is imported
 
 const Footer = () => {
-  
+
   const location = useLocation();
 
   useEffect(() => {
@@ -250,6 +251,16 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        {/* Dev init */}
+        {/* Developer Credit */}
+        <div className="py-4 text-center text-xs text-muted-foreground">
+          <Link
+            to="/developers" className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Project Developer
+          </Link>
+        </div>
+
       </div>
     </footer>
   );
