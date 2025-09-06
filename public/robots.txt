@@ -1,3 +1,20 @@
+# robots.txt for neurootix.com
+
+# Allow all search engines to crawl the site
+User-agent: *
+Disallow:
+
+# Block admin or sensitive routes (uncomment if you have them)
+# Disallow: /admin
+# Disallow: /login
+# Disallow: /private
+
+# Specify the location of the sitemap
+Sitemap: https://neurootix.com/sitemap.xml
+
+# Crawl delay (optional, avoid server overload)
+# Crawl-delay: 10
+
 User-agent: Googlebot
 Allow: /
 
